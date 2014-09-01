@@ -1,0 +1,14 @@
+<%= f.fields_for :common_data do |builder| %>
+  <%= builder.text_field :name %>
+  <%= builder.text_field :contact_person %>
+  <%= builder.collection_select(:center_type_id, @center_types, :id, :name, {:prompt => true}) %>
+  <%= builder.text_field :legal_entity %>
+  <%= builder.text_field :ownership %>
+  <%= builder.text_field :assets_value %>
+  <%= builder.text_area :facilities_details %>
+  <%= builder.date_field :operating_since %>
+  <%= builder.text_area :operating_business %>
+  <%= builder.text_field :liabilities %>
+  <%= builder.number_field :manpower_strength %>
+  <%= builder.text_field :manpower_details %>
+<% end %>

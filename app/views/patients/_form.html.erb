@@ -1,0 +1,40 @@
+<%= bootstrap_form_for @patient, :html => { :class => "form-horizontal patient" } do |f| %>
+
+    <% if @patient.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@patient.errors.count, "error") %> prohibited this patient from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @patient.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.text_field :first_name, placeholder: 'First Name' %>
+  <%= f.text_field :last_name, placeholder: 'Last Name' %>
+  <%= f.text_field :fathers_name, placeholder: 'Father\'s Name' %>
+  <%= f.text_field :mothers_name, placeholder: 'Mother\'s Name' %>
+  <%= f.text_field :husbands_name, placeholder: 'Husband\'s Name' %>
+  <%= f.date_field :dob %>
+  <%= render partial: 'shared/address_form', locals: { address: @address, f: f } %>
+  <%= render partial: 'shared/phone_form', locals: { phone_number: @phone_numbers, f: f } %>
+  <%= f.text_field :card_no, placeholder: 'Card Number' %> 
+  <%= f.date_field :card_date%>
+  <%= f.text_field :referred_by, placeholder: 'Referral' %>
+  <%= f.select(:gender, [["Male", "Male"], ["Female", "Female"]]) %>
+  <%= f.select(:marital_status, [["Single", "Single"], ["Married", "Married"], ["Divorced", "Divorced"], ["Widowed", "Widowed"]]) %>
+  <%= f.select(:blood_group, [["A+", "A+"], ["A-", "A-"], ["B+", "B+"], ["B-", "B-"], ["AB+", "AB+"], ["AB-", "AB-"], ["O+", "O+"], ["O-", "O-"]]) %>
+  <%= f.select(:patient_type, [["Outdoor", "Outdoor"], ["Hospitalized", "Hospitalized"]]) %>
+  <%= f.select(:financial_type, [["Revenue", "Revenue"], ["Zakat", "Zakat"], ["Free", "Free"]]) %>
+  <%= f.select(:treatment_type, [["Homeo+Herbal", "Homeo+Herbal"], ["Herbal", "Herbal"], ["Allopathic", "Allopathic"], ["Health Support", "Health Support"]], include_blank: true) %>
+
+  <%= f.submit 'Add Patient', :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            patients_path, :class => 'btn btn-default' %>
+
+<% end %>

@@ -1,0 +1,2 @@
+class CommonDataController < ApplicationController
+end

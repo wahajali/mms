@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: addresses
+#
+#  id               :integer          not null, primary key
+#  line1            :string(255)
+#  line2            :string(255)
+#  city             :string(255)
+#  zip_code         :string(255)
+#  addressable_id   :integer
+#  addressable_type :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  line1: MyString
+  line2: MyString
+  city: MyString
+  zip_code: MyString
+  contact_person: MyString
+  contact_number: MyString
+
+two:
+  line1: MyString
+  line2: MyString
+  city: MyString
+  zip_code: MyString
+  contact_person: MyString
+  contact_number: MyString

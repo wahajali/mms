@@ -1,0 +1,24 @@
+<%= bootstrap_form_for @clinic, :html => { :class => "form-horizontal clinic" } do |f| %>
+
+    <% if @clinic.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@clinic.errors.count, "error") %> prohibited this clinic from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @clinic.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render partial: 'shared/shared_partials', locals: { common_data: @common_data, f: f, address: @address, phone_number: @phone_numbers } %>
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            clinics_path, :class => 'btn btn-default' %>
+
+<% end %>

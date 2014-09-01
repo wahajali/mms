@@ -1,0 +1,66 @@
+<%= form_for @address, :html => { :class => "form-horizontal address" } do |f| %>
+
+    <% if @address.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@address.errors.count, "error") %> prohibited this address from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @address.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :line1, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :line1, :class => 'form-control' %>
+    </div>
+    <%= error_span(@address[:line1]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :line2, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :line2, :class => 'form-control' %>
+    </div>
+    <%= error_span(@address[:line2]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :city, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :city, :class => 'form-control' %>
+    </div>
+    <%= error_span(@address[:city]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :zip_code, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :zip_code, :class => 'form-control' %>
+    </div>
+    <%= error_span(@address[:zip_code]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :contact_person, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :contact_person, :class => 'form-control' %>
+    </div>
+    <%= error_span(@address[:contact_person]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :contact_number, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :contact_number, :class => 'form-control' %>
+    </div>
+    <%= error_span(@address[:contact_number]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            addresses_path, :class => 'btn btn-default' %>
+
+<% end %>

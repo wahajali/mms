@@ -1,0 +1,4 @@
+<%= f.fields_for :phone_numbers do |builder| %>
+  <%= builder.text_field :number, placeholder: 'Phone Number' %>
+  <%= builder.select(:number_type, [["Mobile", "Mobile"], ["Landline", "Landline"]]) %>
+<% end %>
