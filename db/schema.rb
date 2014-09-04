@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902082920) do
+ActiveRecord::Schema.define(version: 20140904090058) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -98,6 +98,26 @@ ActiveRecord::Schema.define(version: 20140902082920) do
     t.integer  "third_packing_unit_qty"
     t.text     "storage_instructions"
     t.integer  "expiry_duration_months"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "patient_records", force: true do |t|
+    t.integer  "patient_id"
+    t.date     "visit_date_islamic"
+    t.date     "visit_date_english"
+    t.string   "visit_day"
+    t.integer  "doctor_id"
+    t.string   "handling_person"
+    t.float    "checked_weight"
+    t.float    "checked_height"
+    t.float    "checked_bp"
+    t.integer  "no_of_children"
+    t.integer  "youngest_child_age"
+    t.string   "lscs"
+    t.text     "diabetic_history"
+    t.text     "present_complaint"
+    t.text     "conducted_physical_examination"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
