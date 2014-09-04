@@ -85,6 +85,6 @@ class TradingsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def trading_params
-    params.require(:trading).permit(address_attributes: [:line1, :line2, :city, :zip_code],  common_data_attributes: [:contact_person, :center_type_id, :legal_entity, :ownership, :assets_value, :facilities_details, :operating_since, :operating_business, :liabilities, :manpower_strength, :manpower_details], phone_numbers_attributes: [:number, :number_type])
+    params.require(:trading).permit(address_attributes: [:line1, :line2, :city, :zip_code],  common_data_attributes: CommonData.permitted_attributes, phone_numbers_attributes: [:number, :number_type])
   end
 end

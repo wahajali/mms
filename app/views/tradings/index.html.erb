@@ -5,16 +5,18 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name('common_data.name') %></th>
+      <th><%= model_class.human_attribute_name('common_data.contact_person') %></th>
+      <th><%= model_class.human_attribute_name('common_data.center_type.name') %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @tradings.each do |trading| %>
       <tr>
-        <td><%= link_to trading.id, trading_path(trading) %></td>
-        <td><%=l trading.created_at %></td>
+        <td><%= link_to trading.common_data.name, trading_path(trading) %></td>
+        <td><%= trading.common_data.contact_person %></td>
+        <td><%= trading.common_data.center_type.name %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_trading_path(trading), :class => 'btn btn-default btn-xs' %>

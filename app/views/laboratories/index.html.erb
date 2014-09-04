@@ -5,16 +5,18 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name('common_data.name') %></th>
+      <th><%= model_class.human_attribute_name('common_data.contact_person') %></th>
+      <th><%= model_class.human_attribute_name('common_data.center_type.name') %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @laboratories.each do |laboratory| %>
       <tr>
-        <td><%= link_to laboratory.id, laboratory_path(laboratory) %></td>
-        <td><%=l laboratory.created_at %></td>
+        <td><%= link_to laboratory.common_data.name, laboratories_path(laboratory) %></td>
+        <td><%= laboratory.common_data.contact_person %></td>
+        <td><%= laboratory.common_data.center_type.name %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_laboratory_path(laboratory), :class => 'btn btn-default btn-xs' %>

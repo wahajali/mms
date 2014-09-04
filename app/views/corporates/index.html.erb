@@ -5,16 +5,18 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name('common_data.name') %></th>
+      <th><%= model_class.human_attribute_name('common_data.contact_person') %></th>
+      <th><%= model_class.human_attribute_name('common_data.center_type.name') %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @corporates.each do |corporate| %>
       <tr>
-        <td><%= link_to corporate.id, corporate_path(corporate) %></td>
-        <td><%=l corporate.created_at %></td>
+        <td><%= link_to corporate.common_data.name, corporate_path(corporate) %></td>
+        <td><%= corporate.common_data.contact_person %></td>
+        <td><%= corporate.common_data.center_type.name %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_corporate_path(corporate), :class => 'btn btn-default btn-xs' %>

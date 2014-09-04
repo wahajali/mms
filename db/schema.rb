@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140829055527) do
+ActiveRecord::Schema.define(version: 20140902082920) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -70,6 +70,34 @@ ActiveRecord::Schema.define(version: 20140829055527) do
   end
 
   create_table "manufacturings", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "medicine_types", force: true do |t|
+    t.string   "medicine_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "medicines", force: true do |t|
+    t.string   "name"
+    t.integer  "medicine_type_id"
+    t.string   "purpose"
+    t.string   "make"
+    t.string   "manufacturer"
+    t.string   "distributor"
+    t.string   "approving_agency"
+    t.string   "classification_type_1"
+    t.string   "classification_type_2"
+    t.text     "other_specifications"
+    t.string   "form"
+    t.string   "potency"
+    t.integer  "first_packing_unit_qty"
+    t.integer  "second_packing_unit_qty"
+    t.integer  "third_packing_unit_qty"
+    t.text     "storage_instructions"
+    t.integer  "expiry_duration_months"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

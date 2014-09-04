@@ -21,3 +21,21 @@
 
 en:
   hello: "Hello world"
+  activerecord: 
+    attributes: 
+      corporate/common_data/center_type:
+        name: Center Type
+      clinic/common_data/center_type:
+        name: Center Type
+      institute/common_data/center_type:
+        name: Center Type
+      laboratory/common_data/center_type:
+        name: Center Type
+      manufacturing/common_data/center_type:
+        name: Center Type
+      pharmacy/common_data/center_type:
+        name: Center Type
+      trading/common_data/center_type:
+        name: Center Type
+      trust/common_data/center_type:
+        name: Center Type

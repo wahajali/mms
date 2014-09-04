@@ -33,7 +33,7 @@
   <%= f.select(:financial_type, [["Revenue", "Revenue"], ["Zakat", "Zakat"], ["Free", "Free"]]) %>
   <%= f.select(:treatment_type, [["Homeo+Herbal", "Homeo+Herbal"], ["Herbal", "Herbal"], ["Allopathic", "Allopathic"], ["Health Support", "Health Support"]], include_blank: true) %>
 
-  <%= f.submit 'Add Patient', :class => 'btn btn-primary' %>
+  <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             patients_path, :class => 'btn btn-default' %>
 

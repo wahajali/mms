@@ -30,4 +30,8 @@ class Patient < ActiveRecord::Base
 
   accepts_nested_attributes_for :address, allow_destroy: true
   accepts_nested_attributes_for :phone_numbers, allow_destroy: true
+
+  def name
+    first_name + ' ' + last_name
+  end
 end

@@ -23,9 +23,9 @@ class LaboratoriesController < ApplicationController
 
   # GET /laboratories/1/edit
   def edit
-    @address = @laborator.address
-    @phone_numbers = @laborator.phone_numbers
-    @common_data = @laborator.common_data
+    @address = @laboratory.address
+    @phone_numbers = @laboratory.phone_numbers
+    @common_data = @laboratory.common_data
     @center_types = CenterType.all
   end
 
@@ -33,9 +33,9 @@ class LaboratoriesController < ApplicationController
   # POST /laboratories.json
   def create
     @laboratory = Laboratory.new(laboratory_params)
-    @address = @laborator.address
-    @phone_numbers = @laborator.phone_numbers
-    @common_data = @laborator.common_data
+    @address = @laboratory.address
+    @phone_numbers = @laboratory.phone_numbers
+    @common_data = @laboratory.common_data
     @center_types = CenterType.all
 
     respond_to do |format|
@@ -57,9 +57,9 @@ class LaboratoriesController < ApplicationController
         format.html { redirect_to @laboratory, notice: 'Laboratory was successfully updated.' }
         format.json { render :show, status: :ok, location: @laboratory }
       else
-        @address = @laborator.address
-        @phone_numbers = @laborator.phone_numbers
-        @common_data = @laborator.common_data
+        @address = @laboratory.address
+        @phone_numbers = @laboratory.phone_numbers
+        @common_data = @laboratory.common_data
         @center_types = CenterType.all
         format.html { render :edit }
         format.json { render json: @laboratory.errors, status: :unprocessable_entity }
@@ -85,6 +85,6 @@ class LaboratoriesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def laboratory_params
-    params.require(:laborator).permit(address_attributes: [:line1, :line2, :city, :zip_code],  common_data_attributes: [:contact_person, :center_type_id, :legal_entity, :ownership, :assets_value, :facilities_details, :operating_since, :operating_business, :liabilities, :manpower_strength, :manpower_details], phone_numbers_attributes: [:number, :number_type])
+    params.require(:laboratory).permit(address_attributes: [:line1, :line2, :city, :zip_code],  common_data_attributes: CommonData.permitted_attributes, phone_numbers_attributes: [:number, :number_type])
   end
 end

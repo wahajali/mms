@@ -5,46 +5,30 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:card_no) %></th>
-      <th><%= model_class.human_attribute_name(:card_date) %></th>
-      <th><%= model_class.human_attribute_name(:first_name) %></th>
-      <th><%= model_class.human_attribute_name(:last_name) %></th>
-      <th><%= model_class.human_attribute_name(:fathers_name) %></th>
-      <th><%= model_class.human_attribute_name(:mothers_name) %></th>
-      <th><%= model_class.human_attribute_name(:husbands_name) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:dob) %></th>
-      <th><%= model_class.human_attribute_name(:referred_by) %></th>
       <th><%= model_class.human_attribute_name(:gender) %></th>
       <th><%= model_class.human_attribute_name(:marital_status) %></th>
       <th><%= model_class.human_attribute_name(:blood_group) %></th>
       <th><%= model_class.human_attribute_name(:patient_type) %></th>
       <th><%= model_class.human_attribute_name(:financial_type) %></th>
       <th><%= model_class.human_attribute_name(:treatment_type) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @patients.each do |patient| %>
       <tr>
-        <td><%= link_to patient.id, patient_path(patient) %></td>
         <td><%= patient.card_no %></td>
-        <td><%= patient.card_date %></td>
-        <td><%= patient.first_name %></td>
-        <td><%= patient.last_name %></td>
-        <td><%= patient.fathers_name %></td>
-        <td><%= patient.mothers_name %></td>
-        <td><%= patient.husbands_name %></td>
+        <td><%= link_to patient.name, patient_path(patient) %></td>
         <td><%= patient.dob %></td>
-        <td><%= patient.referred_by %></td>
         <td><%= patient.gender %></td>
         <td><%= patient.marital_status %></td>
         <td><%= patient.blood_group %></td>
         <td><%= patient.patient_type %></td>
         <td><%= patient.financial_type %></td>
         <td><%= patient.treatment_type %></td>
-        <td><%=l patient.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_patient_path(patient), :class => 'btn btn-default btn-xs' %>

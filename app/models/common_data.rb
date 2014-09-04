@@ -30,4 +30,8 @@ class CommonData < ActiveRecord::Base
   #validates :entity_type, presence: true
   validates :assets_value, numericality: true, allow_blank: true
   validates :manpower_strength, numericality: { only_integer: true }, allow_blank: true
+
+  def self.permitted_attributes
+    return [:name, :contact_person, :center_type_id, :legal_entity, :ownership, :assets_value, :facilities_details, :operating_since, :operating_business, :liabilities, :manpower_strength, :manpower_details]
+  end
 end

@@ -4,6 +4,7 @@
 </div>
 
 <dl class="dl-horizontal">
+  <%= render partial: 'shared/common_show', locals: { model_class: model_class, model: @pharmacy } %>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
