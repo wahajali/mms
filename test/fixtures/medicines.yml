@@ -1,0 +1,65 @@
+# == Schema Information
+#
+# Table name: medicines
+#
+#  id                      :integer          not null, primary key
+#  name                    :string(255)
+#  medicine_type_id        :integer
+#  purpose                 :string(255)
+#  make                    :string(255)
+#  manufacturer            :string(255)
+#  distributor             :string(255)
+#  approving_agency        :string(255)
+#  classification_type_1   :string(255)
+#  classification_type_2   :string(255)
+#  other_specifications    :text
+#  form                    :string(255)
+#  potency                 :string(255)
+#  first_packing_unit_qty  :integer
+#  second_packing_unit_qty :integer
+#  third_packing_unit_qty  :integer
+#  storage_instructions    :text
+#  expiry_duration_months  :integer
+#  created_at              :datetime
+#  updated_at              :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  medicine_type: MyString
+  purpose: MyString
+  make: MyString
+  manufacturer: MyString
+  distributor: MyString
+  approving_agency: MyString
+  classification_type_1: MyString
+  classification_type_2: MyString
+  other_specifications: MyText
+  form: MyString
+  potency: MyString
+  first_packing_unit_qty: 1
+  second_packing_unit_qty: 1
+  third_packing_unit_qty: 1
+  storage_instructions: MyText
+  expiry_duration_months: 1
+
+two:
+  name: MyString
+  medicine_type: MyString
+  purpose: MyString
+  make: MyString
+  manufacturer: MyString
+  distributor: MyString
+  approving_agency: MyString
+  classification_type_1: MyString
+  classification_type_2: MyString
+  other_specifications: MyText
+  form: MyString
+  potency: MyString
+  first_packing_unit_qty: 1
+  second_packing_unit_qty: 1
+  third_packing_unit_qty: 1
+  storage_instructions: MyText
+  expiry_duration_months: 1

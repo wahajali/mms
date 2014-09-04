@@ -1,0 +1,64 @@
+<%- model_class = PatientRecord -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:patient_id) %></th>
+      <th><%= model_class.human_attribute_name(:visit_date_islamic) %></th>
+      <th><%= model_class.human_attribute_name(:visit_date_english) %></th>
+      <th><%= model_class.human_attribute_name(:visit_day) %></th>
+      <th><%= model_class.human_attribute_name(:doctor_id) %></th>
+      <th><%= model_class.human_attribute_name(:handling_person) %></th>
+      <th><%= model_class.human_attribute_name(:checked_weight) %></th>
+      <th><%= model_class.human_attribute_name(:checked_height) %></th>
+      <th><%= model_class.human_attribute_name(:checked_bp) %></th>
+      <th><%= model_class.human_attribute_name(:no_of_children) %></th>
+      <th><%= model_class.human_attribute_name(:youngest_child_age) %></th>
+      <th><%= model_class.human_attribute_name(:lscs) %></th>
+      <th><%= model_class.human_attribute_name(:diabetic_history) %></th>
+      <th><%= model_class.human_attribute_name(:present_complaint) %></th>
+      <th><%= model_class.human_attribute_name(:conducted_physical_examination) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @patient_records.each do |patient_record| %>
+      <tr>
+        <td><%= link_to patient_record.id, patient_record_path(patient_record) %></td>
+        <td><%= patient_record.patient_id %></td>
+        <td><%= patient_record.visit_date_islamic %></td>
+        <td><%= patient_record.visit_date_english %></td>
+        <td><%= patient_record.visit_day %></td>
+        <td><%= patient_record.doctor_id %></td>
+        <td><%= patient_record.handling_person %></td>
+        <td><%= patient_record.checked_weight %></td>
+        <td><%= patient_record.checked_height %></td>
+        <td><%= patient_record.checked_bp %></td>
+        <td><%= patient_record.no_of_children %></td>
+        <td><%= patient_record.youngest_child_age %></td>
+        <td><%= patient_record.lscs %></td>
+        <td><%= patient_record.diabetic_history %></td>
+        <td><%= patient_record.present_complaint %></td>
+        <td><%= patient_record.conducted_physical_examination %></td>
+        <td><%=l patient_record.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_patient_record_path(patient_record), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      patient_record_path(patient_record),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_patient_record_path,
+            :class => 'btn btn-primary' %>

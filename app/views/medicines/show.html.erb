@@ -1,0 +1,51 @@
+<%- model_class = Medicine -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @medicine.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:medicine_type) %>:</strong></dt>
+  <dd><%= @medicine.medicine_type.medicine_type %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:purpose) %>:</strong></dt>
+  <dd><%= @medicine.purpose %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:make) %>:</strong></dt>
+  <dd><%= @medicine.make %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:manufacturer) %>:</strong></dt>
+  <dd><%= @medicine.manufacturer %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:distributor) %>:</strong></dt>
+  <dd><%= @medicine.distributor %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:approving_agency) %>:</strong></dt>
+  <dd><%= @medicine.approving_agency %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:classification_type_1) %>:</strong></dt>
+  <dd><%= @medicine.classification_type_1 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:classification_type_2) %>:</strong></dt>
+  <dd><%= @medicine.classification_type_2 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:other_specifications) %>:</strong></dt>
+  <dd><%= @medicine.other_specifications %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:form) %>:</strong></dt>
+  <dd><%= @medicine.form %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:potency) %>:</strong></dt>
+  <dd><%= @medicine.potency %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:first_packing_unit_qty) %>:</strong></dt>
+  <dd><%= @medicine.first_packing_unit_qty %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:second_packing_unit_qty) %>:</strong></dt>
+  <dd><%= @medicine.second_packing_unit_qty %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:third_packing_unit_qty) %>:</strong></dt>
+  <dd><%= @medicine.third_packing_unit_qty %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:storage_instructions) %>:</strong></dt>
+  <dd><%= @medicine.storage_instructions %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:expiry_duration_months) %>:</strong></dt>
+  <dd><%= @medicine.expiry_duration_months %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              medicines_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_medicine_path(@medicine), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              medicine_path(@medicine),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

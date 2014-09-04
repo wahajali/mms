@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patient_id: 1
+  visit_date_islamic: 2014-09-04
+  visit_date_english: 2014-09-04
+  visit_day: MyString
+  doctor_id: 1
+  handling_person: MyString
+  checked_weight: 1.5
+  checked_height: 1.5
+  checked_bp: 1.5
+  no_of_children: 1
+  youngest_child_age: 1
+  lscs: MyString
+  diabetic_history: MyText
+  present_complaint: MyText
+  conducted_physical_examination: MyText
+
+two:
+  patient_id: 1
+  visit_date_islamic: 2014-09-04
+  visit_date_english: 2014-09-04
+  visit_day: MyString
+  doctor_id: 1
+  handling_person: MyString
+  checked_weight: 1.5
+  checked_height: 1.5
+  checked_bp: 1.5
+  no_of_children: 1
+  youngest_child_age: 1
+  lscs: MyString
+  diabetic_history: MyText
+  present_complaint: MyText
+  conducted_physical_examination: MyText

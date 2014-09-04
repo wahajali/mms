@@ -1,0 +1,40 @@
+<%= bootstrap_form_for @medicine, :html => { :class => "form-horizontal medicine" } do |f| %>
+
+    <% if @medicine.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@medicine.errors.count, "error") %> prohibited this medicine from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @medicine.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.text_field :name %>
+  <%= f.collection_select(:medicine_type_id, @medicine_type, :id, :medicine_type, {:prompt => true}) %>
+  <%= f.text_field :purpose %>
+  <%= f.select(:make, [["Imported", "Imported"], ["Local", "Local"]], include_blank: true) %>
+  <%= f.text_field :manufacturer %>
+  <%= f.text_field :distributor %>
+  <%= f.text_field :approving_agency %>
+  <%= f.text_field :classification_type_1 %>
+  <%= f.text_field :classification_type_2 %>
+  <%= f.text_area :other_specifications %>
+  <%= f.text_field :form %>
+  <%= f.text_field :potency %>
+  <%= f.number_field :first_packing_unit_qty %>
+  <%= f.number_field :second_packing_unit_qty %>
+  <%= f.number_field :third_packing_unit_qty %>
+  <%= f.text_area :storage_instructions %>
+  <%= f.number_field :expiry_duration_months %>
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            medicines_path, :class => 'btn btn-default' %>
+
+<% end %>

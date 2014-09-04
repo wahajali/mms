@@ -1,0 +1,17 @@
+# == Schema Information
+#
+# Table name: medicine_types
+#
+#  id            :integer          not null, primary key
+#  medicine_type :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  medicine_type: MyString
+
+two:
+  medicine_type: MyString

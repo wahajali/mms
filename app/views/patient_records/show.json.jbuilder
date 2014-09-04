@@ -1,0 +1,1 @@
+json.extract! @patient_record, :id, :patient_id, :visit_date_islamic, :visit_date_english, :visit_day, :doctor_id, :handling_person, :checked_weight, :checked_height, :checked_bp, :no_of_children, :youngest_child_age, :lscs, :diabetic_history, :present_complaint, :conducted_physical_examination, :created_at, :updated_at

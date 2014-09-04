@@ -1,0 +1,36 @@
+<dt><strong><%= model_class.human_attribute_name('common_data.name') %>:</strong></dt>
+<dd><%= model.common_data.name %></dd>
+<dt><strong><%= model_class.human_attribute_name('common_data.contact_person') %>:</strong></dt>
+<dd><%= model.common_data.contact_person %></dd>
+<dt><strong><%= model_class.human_attribute_name('common_data.legal_entity') %>:</strong></dt>
+<dd><%= model.common_data.legal_entity %></dd>
+<dt><strong><%= model_class.human_attribute_name('common_data.ownership') %>:</strong></dt>
+<dd><%= model.common_data.ownership %></dd>
+<dt><strong><%= model_class.human_attribute_name('common_data.assets_value') %>:</strong></dt>
+<dd><%= model.common_data.assets_value %></dd>
+<dt><strong><%= model_class.human_attribute_name('common_data.facilities_details') %>:</strong></dt>
+<dd><%= model.common_data.facilities_details %></dd>
+<dt><strong><%= model_class.human_attribute_name('common_data.operating_since') %>:</strong></dt>
+<dd><%= model.common_data.operating_since %></dd>
+<dt><strong><%= model_class.human_attribute_name('common_data.operating_business') %>:</strong></dt>
+<dd><%= model.common_data.operating_business %></dd>
+<dt><strong><%= model_class.human_attribute_name('common_data.liabilites') %>:</strong></dt>
+<dd><%= model.common_data.liabilities %></dd>
+<dt><strong><%= model_class.human_attribute_name('common_data.manpower_strength') %>:</strong></dt>
+<dd><%= model.common_data.manpower_strength %></dd>
+<dt><strong><%= model_class.human_attribute_name('common_data.manpower_details') %>:</strong></dt>
+<dd><%= model.common_data.manpower_details %></dd>
+<dt><strong><%= model_class.human_attribute_name('address.line1') %>:</strong></dt>
+<dd><%= model.address.line1 %></dd>
+<dt><strong><%= model_class.human_attribute_name('address.line2') %>:</strong></dt>
+<dd><%= model.address.line2 %></dd>
+<dt><strong><%= model_class.human_attribute_name('address.city') %>:</strong></dt>
+<dd><%= model.address.city %></dd>
+<dt><strong><%= model_class.human_attribute_name('address.zip_code') %>:</strong></dt>
+<dd><%= model.address.zip_code %></dd>
+<% model.phone_numbers.each_with_index do |phone, index| %>
+  <dt><strong><%= model_class.human_attribute_name('phone_numbers.number') %>:</strong></dt>
+  <dd><%= phone.number %></dd>
+  <dt><strong><%= model_class.human_attribute_name('phone_numbers.number_type') %>:</strong></dt>
+  <dd><%= phone.number_type %></dd>
+<% end %>
