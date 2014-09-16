@@ -6,8 +6,10 @@
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @medicine.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:medicine_type) %>:</strong></dt>
-  <dd><%= @medicine.medicine_type.medicine_type %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:production) %>:</strong></dt>
+  <dd><%= @medicine.medicine_type.try(:medicine_type) %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:medication_type) %>:</strong></dt>
+  <dd><%= @medicine.medication_type %></dd>
   <dt><strong><%= model_class.human_attribute_name(:purpose) %>:</strong></dt>
   <dd><%= @medicine.purpose %></dd>
   <dt><strong><%= model_class.human_attribute_name(:make) %>:</strong></dt>

@@ -9,8 +9,7 @@
       <th><%= model_class.human_attribute_name(:purpose) %></th>
       <th><%= model_class.human_attribute_name(:make) %></th>
       <th><%= model_class.human_attribute_name(:manufacturer) %></th>
-      <th><%= model_class.human_attribute_name(:classification_type_1) %></th>
-      <th><%= model_class.human_attribute_name(:classification_type_2) %></th>
+      <th><%= model_class.human_attribute_name(:medication_type) %></th>
       <th><%= model_class.human_attribute_name(:potency) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -22,8 +21,7 @@
         <td><%= medicine.purpose %></td>
         <td><%= medicine.make %></td>
         <td><%= medicine.manufacturer %></td>
-        <td><%= medicine.classification_type_1 %></td>
-        <td><%= medicine.classification_type_2 %></td>
+        <td><%= medicine.medication_type %></td>
         <td><%= medicine.potency %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

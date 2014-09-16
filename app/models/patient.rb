@@ -25,11 +25,23 @@
 class Patient < ActiveRecord::Base
   has_one :address, as: :addressable
   has_many :phone_numbers, as: :phoneable
+  has_many :patient_records
 
-  validates :first_name, :last_name, presence: true
+  has_many :family_histories
+  has_many :family_history_diseases, through: :family_histories, source: :disease
+
+  has_many :previous_illnesses
+  has_many :previous_diseases, through: :previous_illnesses, source: :disease
+  #has_many :treatments, through: :previous_illnesses TODO
+
+  validates :first_name, :last_name, presence: true, allow_blank: false
 
   accepts_nested_attributes_for :address, allow_destroy: true
   accepts_nested_attributes_for :phone_numbers, allow_destroy: true
+  accepts_nested_attributes_for :family_histories
+  accepts_nested_attributes_for :previous_illnesses
+  accepts_nested_attributes_for :previous_diseases
+  accepts_nested_attributes_for :family_history_diseases
 
   def name
     first_name + ' ' + last_name

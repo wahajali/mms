@@ -31,8 +31,9 @@ gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) support
 gem "twitter-bootstrap-rails"
 gem "bootstrap_form"
 gem 'thinking-sphinx', '~> 3.1.0'
-
+gem "selectize-rails"
 gem 'annotate', '~> 2.6.5'
+gem "nested_form"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -22,6 +22,7 @@
 #  expiry_duration_months  :integer
 #  created_at              :datetime
 #  updated_at              :datetime
+#  medication_type         :string(255)
 #
 
 require 'test_helper'

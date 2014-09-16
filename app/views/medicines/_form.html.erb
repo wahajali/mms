@@ -16,7 +16,8 @@
   <% end %>
 
   <%= f.text_field :name %>
-  <%= f.collection_select(:medicine_type_id, @medicine_type, :id, :medicine_type, {:prompt => true}) %>
+  <%= f.collection_select(:medicine_type_id, @medicine_type, :id, :medicine_type, {:prompt => true, label: 'Production'}) %>
+  <%= f.select(:medication_type, [["Homeo", "Homeo"], ["Herbal", "Herbal"], ["Allopathic", "Allopathic"]]) %>
   <%= f.text_field :purpose %>
   <%= f.select(:make, [["Imported", "Imported"], ["Local", "Local"]], include_blank: true) %>
   <%= f.text_field :manufacturer %>

@@ -33,8 +33,11 @@
   <%= f.select(:financial_type, [["Revenue", "Revenue"], ["Zakat", "Zakat"], ["Free", "Free"]]) %>
   <%= f.select(:treatment_type, [["Homeo+Herbal", "Homeo+Herbal"], ["Herbal", "Herbal"], ["Allopathic", "Allopathic"], ["Health Support", "Health Support"]], include_blank: true) %>
 
+  <%= f.collection_select(:family_history_disease_ids, @diseases, :id, :name, {label: 'Family History'}, {multiple: true, id: 'family-history'}) %>
+  <%= f.collection_select(:previous_disease_ids, @diseases, :id, :name, {label: 'Previous Patient History'}, {multiple: true, id: 'previous-diseases'}) %>
+
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            patients_path, :class => 'btn btn-default' %>
+    patients_path, :class => 'btn btn-default' %>
 
-<% end %>
+  <% end %>

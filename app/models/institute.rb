@@ -11,6 +11,7 @@ class Institute < ActiveRecord::Base
   has_one :address, as: :addressable
   has_one :common_data, as: :entity
   has_many :phone_numbers, as: :phoneable
+  has_many :expenses, as: :cost_centerable
 
   validates :address, presence: true
   validates :common_data, presence: true

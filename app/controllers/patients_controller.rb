@@ -10,12 +10,16 @@ class PatientsController < ApplicationController
   # GET /patients/1
   # GET /patients/1.json
   def show
+    @patient_records = @patient.patient_records
   end
 
   # GET /patients/new
   def new
     @patient = Patient.new
     @address = @patient.build_address
+    @diseases = Disease.all
+    @patient.family_histories.build
+    @patient.previous_illnesses.build
     @phone_numbers = @patient.phone_numbers.build
   end
 
@@ -23,11 +27,13 @@ class PatientsController < ApplicationController
   def edit
     @address = @patient.address
     @phone_numbers = @patient.phone_numbers
+    @diseases = Disease.all
   end
 
   # POST /patients
   # POST /patients.json
   def create
+    binding.pry
     @patient = Patient.new(patient_params)
 
     respond_to do |format|
@@ -37,6 +43,7 @@ class PatientsController < ApplicationController
       else
         @address = @patient.address
         @phone_numbers = @patient.phone_numbers
+        @diseases = Disease.all
         binding.pry
         format.html { render :new }
         format.json { render json: @patient.errors, status: :unprocessable_entity }
@@ -52,6 +59,9 @@ class PatientsController < ApplicationController
         format.html { redirect_to @patient, notice: 'Patient was successfully updated.' }
         format.json { render :show, status: :ok, location: @patient }
       else
+        @address = @patient.address
+        @phone_numbers = @patient.phone_numbers
+        @diseases = Disease.all
         format.html { render :edit }
         format.json { render json: @patient.errors, status: :unprocessable_entity }
       end
@@ -76,6 +86,6 @@ class PatientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def patient_params
-      params.require(:patient).permit(:card_no, :card_date, :first_name, :last_name, :fathers_name, :mothers_name, :husbands_name, :dob, :referred_by, :gender, :marital_status, :blood_group, :patient_type, :financial_type, :treatment_type, phone_numbers_attributes: [:number, :number_type], address_attributes: [:line1, :line2, :city, :zip_code])
+      params.require(:patient).permit(:card_no, :card_date, :first_name, :last_name, :fathers_name, :mothers_name, :husbands_name, :dob, :referred_by, :gender, :marital_status, :blood_group, :patient_type, :financial_type, :treatment_type, phone_numbers_attributes: [:number, :number_type], address_attributes: [:line1, :line2, :city, :zip_code], family_history_disease_ids: [], previous_disease_ids: [])
     end
 end

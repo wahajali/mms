@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904090058) do
+ActiveRecord::Schema.define(version: 20140916021156) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -59,6 +59,52 @@ ActiveRecord::Schema.define(version: 20140904090058) do
     t.datetime "updated_at"
   end
 
+  create_table "diseases", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "doctors", force: true do |t|
+    t.string   "name"
+    t.text     "qualification"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "expense_categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "expense_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "expenses", force: true do |t|
+    t.date     "date"
+    t.integer  "expense_category_id"
+    t.string   "receipient"
+    t.integer  "expense_type_id"
+    t.float    "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "cost_centerable_id"
+    t.integer  "cost_centerable_type"
+  end
+
+  create_table "family_histories", force: true do |t|
+    t.integer  "disease_id"
+    t.integer  "patient_id"
+    t.string   "relation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "institutes", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -100,6 +146,7 @@ ActiveRecord::Schema.define(version: 20140904090058) do
     t.integer  "expiry_duration_months"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "medication_type"
   end
 
   create_table "patient_records", force: true do |t|
@@ -120,6 +167,7 @@ ActiveRecord::Schema.define(version: 20140904090058) do
     t.text     "conducted_physical_examination"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "disease_id"
   end
 
   create_table "patients", force: true do |t|
@@ -152,6 +200,24 @@ ActiveRecord::Schema.define(version: 20140904090058) do
     t.string   "number_type"
     t.integer  "phoneable_id"
     t.string   "phoneable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "prescriptions", force: true do |t|
+    t.integer  "medicine_id"
+    t.integer  "patient_record_id"
+    t.float    "morning_quantity"
+    t.float    "afternoon_quantity"
+    t.float    "evening_quantity"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "previous_illnesses", force: true do |t|
+    t.integer  "disease_id"
+    t.integer  "patient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

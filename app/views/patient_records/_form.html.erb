@@ -1,4 +1,4 @@
-<%= form_for @patient_record, :html => { :class => "form-horizontal patient_record" } do |f| %>
+<%= bootstrap_nested_form_for [@patient, @patient_record], :html => { :class => "form-horizontal patient_record" } do |f| %>
 
     <% if @patient_record.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -15,115 +15,45 @@
     </div>
   <% end %>
 
-  <div class="control-group">
-    <%= f.label :patient_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :patient_id, :class => 'form-control' %>
+  <%= f.date_field :visit_date_english, :value => Date.today %>
+  <%= f.collection_select(:doctor_id, Doctor.all, :id, :name, {label: 'Attending Doctor', :prompt => true}) %>
+  <%= f.collection_select(:disease_id, Disease.all, :id, :name, {label: 'Diagnosed Disease', :prompt => true}) %>
+  <%= f.select(:visit_day, [["Monday", "Monday"], ["Tueday", "Tueday"], ["Wednesday", "Wednesday"], ["Thursday", "Thursday"], ["Friday", "Friday"], ["Saturday", "Saturday"], ["Sunday", "Sunday"]]) %>
+  <%= f.text_field :handling_person %>
+  <%= f.hidden_field :patient_id, value: @patient.id %>
+  <%= f.number_field :checked_weight %>
+  <%= f.number_field :checked_height %>
+  <%= f.number_field :checked_bp %>
+  <%= f.number_field :no_of_children %>
+  <%= f.number_field :youngest_child_age %>
+  <%= f.text_field :lscs %>
+  <%= f.text_field :diabetic_history %>
+  <%= f.text_area :present_complaint %>
+  <%= f.text_area :conducted_physical_examination %>
+  <% f.fields_for :prescriptions do |b| %>
+    <div class='prescription'>
+    <%= b.static_control :medication_type, label: { text: "Medicine Type: " } do %>
+      <%= check_box_tag(:homeopathy) %>
+      <%= label_tag(:hemeopathy, "Hemeopathic Medications") %>
+      <%= check_box_tag(:herbal) %>
+      <%= label_tag(:herbal, "Herbal Medications") %>
+      <%= check_box_tag(:allopathic) %>
+      <%= label_tag(:allopathic, "Allopathic Medications") %>
+    <% end %>
+    <%= b.select :medicine_id, options_for_select(@medicines.map{ |c| [c.display_name, c.id, {'data-medicine-id' => c.id}] }) %>
+    <%#= b.collection_select(:medicine_id, @medicines, :id, :display_name, {label: 'Prescribed Medicines'}, {id: 'prescribed-medicine'}) %>
+    <%= b.number_field :morning_quantity, { style: 'width:70px; display: block;', value: 0 } %>
+    <%= b.number_field :afternoon_quantity, { style: 'width:70px; display: block;', value: 0 } %>
+    <%= b.number_field :evening_quantity, { style: 'width:70px; display: block;', value: 0 } %>
+    <%= b.link_to_remove "Remove this prescription" %>
     </div>
-    <%= error_span(@patient_record[:patient_id]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :visit_date_islamic, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :visit_date_islamic, :class => 'form-control' %>
-    </div>
-    <%= error_span(@patient_record[:visit_date_islamic]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :visit_date_english, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :visit_date_english, :class => 'form-control' %>
-    </div>
-    <%= error_span(@patient_record[:visit_date_english]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :visit_day, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :visit_day, :class => 'form-control' %>
-    </div>
-    <%= error_span(@patient_record[:visit_day]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :doctor_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :doctor_id, :class => 'form-control' %>
-    </div>
-    <%= error_span(@patient_record[:doctor_id]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :handling_person, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :handling_person, :class => 'form-control' %>
-    </div>
-    <%= error_span(@patient_record[:handling_person]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :checked_weight, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :checked_weight, :class => 'form-control' %>
-    </div>
-    <%= error_span(@patient_record[:checked_weight]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :checked_height, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :checked_height, :class => 'form-control' %>
-    </div>
-    <%= error_span(@patient_record[:checked_height]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :checked_bp, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :checked_bp, :class => 'form-control' %>
-    </div>
-    <%= error_span(@patient_record[:checked_bp]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :no_of_children, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :no_of_children, :class => 'form-control' %>
-    </div>
-    <%= error_span(@patient_record[:no_of_children]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :youngest_child_age, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :youngest_child_age, :class => 'form-control' %>
-    </div>
-    <%= error_span(@patient_record[:youngest_child_age]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :lscs, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :lscs, :class => 'form-control' %>
-    </div>
-    <%= error_span(@patient_record[:lscs]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :diabetic_history, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :diabetic_history, :class => 'form-control' %>
-    </div>
-    <%= error_span(@patient_record[:diabetic_history]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :present_complaint, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :present_complaint, :class => 'form-control' %>
-    </div>
-    <%= error_span(@patient_record[:present_complaint]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :conducted_physical_examination, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :conducted_physical_examination, :class => 'form-control' %>
-    </div>
-    <%= error_span(@patient_record[:conducted_physical_examination]) %>
-  </div>
+  <% end %>
+  <%= f.link_to_add "Add a prescription", :prescriptions %></br></br>
 
+  <%#= f.collection_select(:medicine_ids, @medicine_homeo, :id, :name, {label: 'Prescribed Homeo Medicines'}, {id: 'prescribed-medicine-homeo'}) %>
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            patient_records_path, :class => 'btn btn-default' %>
+    patient_path(@patient), :class => 'btn btn-default' %>
 
-<% end %>
+  <% end %>

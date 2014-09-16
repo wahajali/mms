@@ -1,5 +1,6 @@
 class MedicinesController < ApplicationController
-  before_action :set_medicine, only: [:show, :edit, :update, :destroy]
+  before_action :set_medicine, only: [:preview, :show, :edit, :update, :destroy]
+  layout 'preview', only: :preview
 
   # GET /medicines
   # GET /medicines.json
@@ -27,7 +28,6 @@ class MedicinesController < ApplicationController
   # POST /medicines.json
   def create
     @medicine = Medicine.new(medicine_params)
-    binding.pry
 
     respond_to do |format|
       if @medicine.save
@@ -65,6 +65,10 @@ class MedicinesController < ApplicationController
     end
   end
 
+  # GET /medicines/1
+  def preview
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_medicine
@@ -73,6 +77,6 @@ class MedicinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def medicine_params
-      params.require(:medicine).permit(:name, :medicine_type_id, :purpose, :make, :manufacturer, :distributor, :approving_agency, :classification_type_1, :classification_type_2, :other_specifications, :form, :potency, :first_packing_unit_qty, :second_packing_unit_qty, :third_packing_unit_qty, :storage_instructions, :expiry_duration_months)
+      params.require(:medicine).permit(:name, :medicine_type_id, :purpose, :make, :manufacturer, :distributor, :approving_agency, :classification_type_1, :classification_type_2, :other_specifications, :form, :potency, :first_packing_unit_qty, :second_packing_unit_qty, :third_packing_unit_qty, :storage_instructions, :expiry_duration_months, :medication_type)
     end
 end

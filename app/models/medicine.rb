@@ -22,10 +22,18 @@
 #  expiry_duration_months  :integer
 #  created_at              :datetime
 #  updated_at              :datetime
+#  medication_type         :string(255)
 #
 
 class Medicine < ActiveRecord::Base
   belongs_to :medicine_type
 
+  has_many :prescriptions
+  has_many :patient_records, through: :prescriptions
+
   validates :name, presence: true
+
+  def display_name 
+    potency.blank? ? name : (name + " - " + potency)
+  end
 end

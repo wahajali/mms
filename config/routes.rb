@@ -1,9 +1,28 @@
 Rails.application.routes.draw do
-  resources :patient_records
+  resources :expense_categories
 
-  resources :medicines
+  resources :expense_types
 
-  resources :patients
+  resources :expenses
+
+  resources :doctors
+
+  resources :diseases do
+    member do
+      get 'preview'
+    end
+  end
+
+
+  resources :medicines do 
+    member do
+      get 'preview'
+    end
+  end
+
+  resources :patients do 
+    resources :patient_records
+  end
 
   resources :manufacturings
 
