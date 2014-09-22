@@ -1,0 +1,13 @@
+<%- model_class = Medicine -%>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @medicine.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:make) %>:</strong></dt>
+  <dd><%= @medicine.make %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:manufacturer) %>:</strong></dt>
+  <dd><%= @medicine.manufacturer %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:potency) %>:</strong></dt>
+  <dd><%= @medicine.potency %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:medicine_type) %>:</strong></dt>
+  <dd><%= @medicine.medicine_type.try(:name) %></dd>
+</dl>

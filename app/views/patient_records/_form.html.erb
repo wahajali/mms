@@ -1,15 +1,15 @@
 <%= bootstrap_nested_form_for [@patient, @patient_record], :html => { :class => "form-horizontal patient_record" } do |f| %>
 
-    <% if @patient_record.errors.any? %>
+  <% if @patient_record.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
         <h3 class="panel-title"><%= pluralize(@patient_record.errors.count, "error") %> prohibited this patient_record from being saved:</h3>
       </div>
       <div class="panel-body">
         <ul>
-        <% @patient_record.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
+          <% @patient_record.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
         </ul>
       </div>
     </div>
@@ -28,27 +28,27 @@
   <%= f.number_field :youngest_child_age %>
   <%= f.text_field :lscs %>
   <%= f.text_field :diabetic_history %>
+  <%= f.text_area :investigation_and_report %>
   <%= f.text_area :present_complaint %>
   <%= f.text_area :conducted_physical_examination %>
   <% f.fields_for :prescriptions do |b| %>
     <div class='prescription'>
-    <%= b.static_control :medication_type, label: { text: "Medicine Type: " } do %>
-      <%= check_box_tag(:homeopathy) %>
-      <%= label_tag(:hemeopathy, "Hemeopathic Medications") %>
-      <%= check_box_tag(:herbal) %>
-      <%= label_tag(:herbal, "Herbal Medications") %>
-      <%= check_box_tag(:allopathic) %>
-      <%= label_tag(:allopathic, "Allopathic Medications") %>
-    <% end %>
-    <%= b.select :medicine_id, options_for_select(@medicines.map{ |c| [c.display_name, c.id, {'data-medicine-id' => c.id}] }) %>
-    <%#= b.collection_select(:medicine_id, @medicines, :id, :display_name, {label: 'Prescribed Medicines'}, {id: 'prescribed-medicine'}) %>
-    <%= b.number_field :morning_quantity, { style: 'width:70px; display: block;', value: 0 } %>
-    <%= b.number_field :afternoon_quantity, { style: 'width:70px; display: block;', value: 0 } %>
-    <%= b.number_field :evening_quantity, { style: 'width:70px; display: block;', value: 0 } %>
-    <%= b.link_to_remove "Remove this prescription" %>
+      <%= b.static_control :medication_type, label: { text: "Medicine Type: " } do %>
+        <%= check_box_tag(:homeopathy, 'homeo', true, id: 'medication-type-homeo') %>
+        <%= label_tag(:homeopathy, "Hemeopathic Medications") %>
+        <%= check_box_tag(:herbal, 'herbal', true, id: 'medication-type-herbal') %>
+        <%= label_tag(:herbal, "Herbal Medications") %>
+        <%= check_box_tag(:allopathic, 'allopathic', true, id: 'medication-type-allo') %>
+        <%= label_tag(:allopathic, "Allopathic Medications") %>
+      <% end %>
+      <%= b.select :medicine_id, options_for_select(@medicines.map{ |c| [c.display_name, c.id, {'class' => "medication-type-#{c.medication_type.try(:downcase)}"}]}, @medicines.first.id), {}, class: 'medicine-select' %>
+      <%= link_to 'Details', preview_medicine_path(@medicines.first), id: 'link-to-medicine' %>
+      <%= b.text_field :dosage %>
+      <%= b.text_area :notes %>
+      <%= b.link_to_remove "Remove this prescription" %>
     </div>
   <% end %>
-  <%= f.link_to_add "Add a prescription", :prescriptions %></br></br>
+  <%= f.link_to_add "Add a prescription", :prescriptions, id: 'link-to-add-prescription' %></br></br>
 
   <%#= f.collection_select(:medicine_ids, @medicine_homeo, :id, :name, {label: 'Prescribed Homeo Medicines'}, {id: 'prescribed-medicine-homeo'}) %>
 

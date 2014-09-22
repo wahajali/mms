@@ -20,13 +20,11 @@
 //
 
 $(document).ready(function(){
-  //$('.prescription option').live("contextmenu", function(){
-  //$('#patient_record_disease_id').on("click", 'option', function(e){
-  $(document.body).on('click', '#patient_record_disease_id', function(){
-    console.log('wahaj');
+  $(document.body).on("click", '#link-to-medicine', function(){
+    var selected_id = $(event.target).parent('.prescription').find('select option:selected').val();
     var left  = ($(window).width()/2) - 200;
     var t = ($(window).height()/2);
-    var url = window.location.origin + "\/medicines\/" + $(this).val() + "\/preview";
+    var url = window.location.origin + "\/medicines\/" + selected_id + "\/preview";
     var popup = window.open (url, "popup", "width=400, height=300, top=" + t + ", left=" + left);
     return false;
   }); 

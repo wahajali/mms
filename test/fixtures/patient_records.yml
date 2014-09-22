@@ -21,6 +21,7 @@
 #  created_at                     :datetime
 #  updated_at                     :datetime
 #  disease_id                     :integer
+#  investigation_and_report       :text
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

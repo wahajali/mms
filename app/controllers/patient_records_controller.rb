@@ -28,12 +28,13 @@ class PatientRecordsController < ApplicationController
   # POST /patient_records
   # POST /patient_records.json
   def create
+    @patient = Patient.find(params[:patient_id])
     binding.pry
     @patient_record = PatientRecord.new(patient_record_params)
 
     respond_to do |format|
       if @patient_record.save
-        format.html { redirect_to @patient_record, notice: 'Patient record was successfully created.' }
+        format.html { redirect_to patient_patient_record_path(@patient, @patient_record), notice: 'Patient record was successfully created.' }
         format.json { render :show, status: :created, location: @patient_record }
       else
         get_meds
@@ -80,6 +81,6 @@ class PatientRecordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def patient_record_params
-      params.require(:patient_record).permit(:patient_id, :visit_date_islamic, :visit_date_english, :visit_day, :doctor_id, :handling_person, :checked_weight, :checked_height, :checked_bp, :no_of_children, :youngest_child_age, :lscs, :diabetic_history, :present_complaint, :conducted_physical_examination)
+      params.require(:patient_record).permit(:patient_id, :visit_date_islamic, :visit_date_english, :visit_day, :doctor_id, :handling_person, :checked_weight, :checked_height, :checked_bp, :no_of_children, :youngest_child_age, :lscs, :diabetic_history, :present_complaint, :conducted_physical_examination, :disease_id, :investigation_and_report, prescriptions_attributes: [:id, :medicine_id, :dosage, :notes, :_destroy])
     end
 end

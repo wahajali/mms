@@ -31,7 +31,7 @@ class Medicine < ActiveRecord::Base
   has_many :prescriptions
   has_many :patient_records, through: :prescriptions
 
-  validates :name, presence: true
+  validates :name, :medication_type, presence: true
 
   def display_name 
     potency.blank? ? name : (name + " - " + potency)

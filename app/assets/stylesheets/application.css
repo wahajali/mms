@@ -14,5 +14,13 @@
  *= require_self
  *= require selectize
  *= require selectize.bootstrap3
+ *= require 'rails_bootstrap_forms'
  */
- = require 'rails_bootstrap_forms'
+
+.prescription{
+  border: 1px dotted #9F9B63;
+  padding: 2em;
+  overflow: auto;
+  background-color: #FFFDDF;
+  margin-bottom: 2em;
+}

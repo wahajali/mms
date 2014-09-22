@@ -21,6 +21,7 @@
 #  created_at                     :datetime
 #  updated_at                     :datetime
 #  disease_id                     :integer
+#  investigation_and_report       :text
 #
 
 class PatientRecord < ActiveRecord::Base

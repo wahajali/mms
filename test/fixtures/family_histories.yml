@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: family_histories
+#
+#  id         :integer          not null, primary key
+#  disease_id :integer
+#  patient_id :integer
+#  relation   :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  disease_id: 1
+  patient_id: 1
+  relation: MyString
+
+two:
+  disease_id: 1
+  patient_id: 1
+  relation: MyString
