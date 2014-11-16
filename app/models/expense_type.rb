@@ -9,6 +9,7 @@
 #
 
 class ExpenseType < ActiveRecord::Base
-  has_many :expenses
+  has_many :expenses, dependent: :restrict_with_error
   validates :name, presence: true, allow_blank: false
+  validates :name, uniqueness: true
 end

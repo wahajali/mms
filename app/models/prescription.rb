@@ -12,6 +12,6 @@
 #
 
 class Prescription < ActiveRecord::Base
-  belongs_to :medicine, inverse_of: :prescription
+  belongs_to :medicine, inverse_of: :prescriptions
   belongs_to :patient_record, inverse_of: :prescription
 end

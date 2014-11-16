@@ -10,18 +10,19 @@ class PatientRecordsController < ApplicationController
   # GET /patient_records/1
   # GET /patient_records/1.json
   def show
+    @patient = Patient.find(params['patient_id'])
   end
 
   # GET /patient_records/new
   def new
     @patient = Patient.find(params['patient_id'])
     @patient_record = @patient.patient_records.build
-    @patient_record.prescriptions.build
     get_meds
   end
 
   # GET /patient_records/1/edit
   def edit
+    @patient = Patient.find(params['patient_id'])
     get_meds
   end
 
@@ -29,8 +30,8 @@ class PatientRecordsController < ApplicationController
   # POST /patient_records.json
   def create
     @patient = Patient.find(params[:patient_id])
-    binding.pry
     @patient_record = PatientRecord.new(patient_record_params)
+    binding.pry
 
     respond_to do |format|
       if @patient_record.save
@@ -47,9 +48,11 @@ class PatientRecordsController < ApplicationController
   # PATCH/PUT /patient_records/1
   # PATCH/PUT /patient_records/1.json
   def update
+    @patient = Patient.find(params[:patient_id])
+    binding.pry
     respond_to do |format|
       if @patient_record.update(patient_record_params)
-        format.html { redirect_to @patient_record, notice: 'Patient record was successfully updated.' }
+        format.html { redirect_to [@patient, @patient_record], notice: 'Patient record was successfully updated.' }
         format.json { render :show, status: :ok, location: @patient_record }
       else
         get_meds
@@ -62,9 +65,10 @@ class PatientRecordsController < ApplicationController
   # DELETE /patient_records/1
   # DELETE /patient_records/1.json
   def destroy
+    @patient = Patient.find(params['patient_id'])
     @patient_record.destroy
     respond_to do |format|
-      format.html { redirect_to patient_records_url, notice: 'Patient record was successfully destroyed.' }
+      format.html { redirect_to @patient, notice: 'Patient record was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

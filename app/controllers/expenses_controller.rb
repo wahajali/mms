@@ -15,6 +15,7 @@ class ExpensesController < ApplicationController
   # GET /expenses/new
   def new
     @expense = Expense.new
+    @categories = BsOrPlCategory.all
   end
 
   # GET /expenses/1/edit
@@ -24,6 +25,8 @@ class ExpensesController < ApplicationController
   # POST /expenses
   # POST /expenses.json
   def create
+    expense_params["cost_centerable_type"] = expense_params["cost_centerable_id"].split(';').first
+    expense_params["cost_centerable_id"] = expense_params["cost_centerable_id"].split(';').last
     @expense = Expense.new(expense_params)
 
     respond_to do |format|
@@ -40,6 +43,8 @@ class ExpensesController < ApplicationController
   # PATCH/PUT /expenses/1
   # PATCH/PUT /expenses/1.json
   def update
+    expense_params["cost_centerable_type"] = expense_params["cost_centerable_id"].split(';').first
+    expense_params["cost_centerable_id"] = expense_params["cost_centerable_id"].split(';').last
     respond_to do |format|
       if @expense.update(expense_params)
         format.html { redirect_to @expense, notice: 'Expense was successfully updated.' }
@@ -69,6 +74,7 @@ class ExpensesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expense_params
-      params.require(:expense).permit(:date, :expense_category_id, :receipient, :expense_type_id, :amount)
+      params.require(:expense).permit!
+      #params.require(:expense).permit(:date, :expense_category_id, :receipient, :expense_type_id, :amount, :bal_sheet_or_pl)
     end
 end

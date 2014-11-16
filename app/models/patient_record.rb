@@ -34,5 +34,4 @@ class PatientRecord < ActiveRecord::Base
 
   accepts_nested_attributes_for :prescriptions
   accepts_nested_attributes_for :medicines
-
 end

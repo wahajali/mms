@@ -19,4 +19,12 @@ class Trust < ActiveRecord::Base
   accepts_nested_attributes_for :address, allow_destroy: true
   accepts_nested_attributes_for :common_data, allow_destroy: true
   accepts_nested_attributes_for :phone_numbers, allow_destroy: true
+
+  def name
+    "#{self.class.name} - #{common_data.name}"
+  end
+
+  def value
+    "#{self.class.name};#{id}"
+  end
 end

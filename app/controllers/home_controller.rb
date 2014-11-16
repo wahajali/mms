@@ -15,4 +15,12 @@ class HomeController < ApplicationController
   # GET /faq
   def faq
   end
+
+  # GET /balance_sheet
+  def balance_sheet
+  end
+
+  # GET /pnl
+  def pnl
+  end
 end

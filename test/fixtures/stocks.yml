@@ -1,0 +1,35 @@
+# == Schema Information
+#
+# Table name: stocks
+#
+#  id               :integer          not null, primary key
+#  medicine_id      :integer
+#  purchase_date    :date
+#  purchase_qty     :integer
+#  purchase_details :text
+#  purchase_price   :float
+#  expiry           :date
+#  present_stock    :integer
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  medicine_id: 1
+  purchase_date: 2014-10-15
+  purchase_qty: 1
+  purchase_details: MyText
+  purchase_price: 1.5
+  expiry: 2014-10-15
+  present_stock: 1
+
+two:
+  medicine_id: 1
+  purchase_date: 2014-10-15
+  purchase_qty: 1
+  purchase_details: MyText
+  purchase_price: 1.5
+  expiry: 2014-10-15
+  present_stock: 1

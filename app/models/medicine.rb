@@ -28,8 +28,9 @@
 class Medicine < ActiveRecord::Base
   belongs_to :medicine_type
 
-  has_many :prescriptions
+  has_many :prescriptions, inverse_of: :medicine
   has_many :patient_records, through: :prescriptions
+  has_many :stocks
 
   validates :name, :medication_type, presence: true
 

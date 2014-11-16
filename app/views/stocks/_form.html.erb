@@ -1,0 +1,30 @@
+<%= bootstrap_nested_form_for [@medicine, @stock], :html => { :class => "form-horizontal stock" } do |f| %>
+
+    <% if @stock.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@stock.errors.count, "error") %> prohibited this stock from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @stock.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.collection_select(:medicine_id, Medicine.all, :id, :name, {label: 'Medicine Name', :prompt => true}) %>
+  <%= f.date_field :purchase_date, :value => Date.today %>
+  <%= f.number_field :purchase_qty %>
+  <%= f.text_area :purchase_details %>
+  <%= f.number_field :purchase_price %>
+  <%= f.date_field :expiry, :value => Date.today %>
+  <%= f.number_field :present_stock %>
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            stocks_path, :class => 'btn btn-default' %>
+
+<% end %>

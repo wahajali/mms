@@ -1,0 +1,71 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>To/From</th>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Sum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% current = nil %>
+    <% sum = 0 %>
+    <% @both.each do |item| %>
+      <% if current != item.bs_or_pl_category_id %>
+        <% if current.present? %>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <% if(sum > 0) %>
+              <th><%= sum %></th>
+            <% else %>
+              <th>(<%= sum %>)</th>
+            <% end %>
+          </tr>
+        <% end %>
+        <% current = item.bs_or_pl_category_id %>
+        <% sum = 0 %>
+        <tr class="success">
+          <th><%= item.bs_or_pl_category.name.titleize %></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      <% end %>
+      <tr>
+        <% if item.class == Income %>
+          <td></td>
+          <td><%= item.benefactor %></td>
+          <td><%= item.date %></td>
+          <td><%= item.amount %></td>
+          <td></td>
+          <% sum = sum + item.amount %>
+        <% else %>
+          <td></td>
+          <td><%= item.receipient %></td>
+          <td><%= item.date %></td>
+          <td>(<%= item.amount %>)</td>
+          <td></td>
+          <% sum = sum - item.amount %>
+        <% end %>
+      </tr>
+    <% end %>
+    <% if current.present? %>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <% if(sum > 0) %>
+          <th><%= sum %></th>
+        <% else %>
+          <th>(<%= sum %>)</th>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,2 @@
+module BsOrPlCategoriesHelper
+end

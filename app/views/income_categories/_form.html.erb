@@ -1,0 +1,24 @@
+<%= bootstrap_form_for @income_category, :html => { :class => "form-horizontal income_category" } do |f| %>
+
+    <% if @income_category.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@income_category.errors.count, "error") %> prohibited this income_category from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @income_category.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.text_field :name %>
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            income_categories_path, :class => 'btn btn-default' %>
+
+<% end %>

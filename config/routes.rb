@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+
+  resources :bs_or_pl_categories
+
+  resources :incomes
+
+  resources :income_types
+
+  resources :income_categories
+
+  resources :income_sub_categories
+
+  resources :expense_sub_categories
+
   resources :expense_categories
 
   resources :expense_types
@@ -13,15 +26,17 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :stocks, only: [:new, :create]
 
   resources :medicines do 
+    resources :stocks, except: [:new, :create]
     member do
       get 'preview'
     end
   end
 
   resources :patients do 
-    resources :patient_records
+    resources :patient_records, except: [:index]
   end
 
   resources :manufacturings
@@ -47,6 +62,10 @@ Rails.application.routes.draw do
   get "about" => "home#about"
   get "contact" => "home#contact"
   get "faq" => "home#faq"
+  get "search" => "search#query"
+  get "balance_sheet" => "reports#balance_sheet"
+  get "pnl" => "reports#pnl"
+  get "reports" => "reports#reports"
 
 #  resources :addresses
 

@@ -1,0 +1,24 @@
+<% if @result.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Card Number</th>
+      </tr>
+    </thead>
+    <% @result.each_with_index do |obj, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= link_to(obj.name, patient_path(obj)) %></td>
+        <td><%= obj.card_no %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <div>
+    <p class="bg-primary" style="padding:15px;">No results found.</p>
+  </div>
+<% end %>
+
+<%= will_paginate @result, renderer: BootstrapPagination::Rails %>

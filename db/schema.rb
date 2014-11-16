@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917174355) do
+ActiveRecord::Schema.define(version: 20141116043637) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 20140917174355) do
     t.string   "zip_code"
     t.integer  "addressable_id"
     t.string   "addressable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bs_or_pl_categories", force: true do |t|
+    t.string   "name"
+    t.string   "bl_or_pl"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -79,6 +86,12 @@ ActiveRecord::Schema.define(version: 20140917174355) do
     t.datetime "updated_at"
   end
 
+  create_table "expense_sub_categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "expense_types", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -94,7 +107,12 @@ ActiveRecord::Schema.define(version: 20140917174355) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "cost_centerable_id"
-    t.integer  "cost_centerable_type"
+    t.string   "cost_centerable_type"
+    t.integer  "expense_sub_category_id"
+    t.string   "bal_sheet_or_pl"
+    t.integer  "bs_or_pl_category_id"
+    t.string   "voucher_or_ref_details"
+    t.string   "unique_identifier"
   end
 
   create_table "family_histories", force: true do |t|
@@ -103,6 +121,41 @@ ActiveRecord::Schema.define(version: 20140917174355) do
     t.string   "relation"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "income_categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "income_sub_categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "income_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "incomes", force: true do |t|
+    t.date     "date"
+    t.integer  "income_category_id"
+    t.integer  "income_sub_category_id"
+    t.integer  "income_type_id"
+    t.string   "benefactor"
+    t.float    "amount"
+    t.integer  "cost_centerable_id"
+    t.string   "cost_centerable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "bs_or_pl_category_id"
+    t.string   "bal_sheet_or_pl"
+    t.string   "voucher_or_ref_details"
+    t.string   "unique_identifier"
   end
 
   create_table "institutes", force: true do |t|
@@ -217,6 +270,18 @@ ActiveRecord::Schema.define(version: 20140917174355) do
   create_table "previous_illnesses", force: true do |t|
     t.integer  "disease_id"
     t.integer  "patient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stocks", force: true do |t|
+    t.integer  "medicine_id"
+    t.date     "purchase_date"
+    t.integer  "purchase_qty"
+    t.text     "purchase_details"
+    t.float    "purchase_price"
+    t.date     "expiry"
+    t.integer  "present_stock"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

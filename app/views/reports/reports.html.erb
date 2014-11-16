@@ -1,0 +1,19 @@
+<div>
+  <h2>Balance Sheet</h2>
+  <%= bootstrap_form_tag url: balance_sheet_path, layout: :inline, method: :get do |f| %>
+    <%= f.select(:cost_centerable, cost_centers.collect { |a| [a.name, a.value] }, {prompt: true, label: 'Business Center'}) %>
+    <%= f.date_field 'from', :value => Date.today %>
+    <%= f.date_field 'to', :value => Date.today %>
+    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  <% end %>
+</div>
+</br>
+<div>
+  <h2>Profit and Loss</h2>
+  <%= bootstrap_form_tag url: pnl_path, layout: :inline, method: :get do |f| %>
+    <%= f.select(:cost_centerable, cost_centers.collect { |a| [a.name, a.value] }, {prompt: true, label: 'Business Center'}) %>
+    <%= f.date_field 'from', :value => Date.today %>
+    <%= f.date_field 'to', :value => Date.today %>
+    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  <% end %>
+</div>

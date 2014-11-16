@@ -34,6 +34,9 @@ gem 'thinking-sphinx', '~> 3.1.0'
 gem "selectize-rails"
 gem 'annotate', '~> 2.6.5'
 gem "nested_form"
+gem 'will_paginate', '~> 3.0'
+gem 'will_paginate-bootstrap'
+gem 'jquery-turbolinks'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

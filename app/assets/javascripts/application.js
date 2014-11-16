@@ -16,8 +16,38 @@
 //= require turbolinks
 //= require selectize
 //= require jquery_nested_form
+//= require jquery.turbolinks
 //= require_tree .
 //
+
+$(document).ready(function(){
+  $('#expense_bal_sheet_or_pl').change(function(){
+    if($('#expense_bal_sheet_or_pl').find('option:selected').attr('value') == "Profit & Loss"){
+      $('.bs-or-pl-select .profit-loss').show();
+      $('.bs-or-pl-select .profit-loss').first().attr('selected','selected');
+      $('.bs-or-pl-select .balance-sheet').hide();
+    }
+    else if($('#expense_bal_sheet_or_pl').find('option:selected').attr('value') == "Balance Sheet"){
+      $('.bs-or-pl-select .balance-sheet').show();
+      $('.bs-or-pl-select .balance-sheet').first().attr('selected','selected');
+      $('.bs-or-pl-select .profit-loss').hide();
+    }
+  });
+  $('#income_bal_sheet_or_pl').change(function(){
+    if($('#income_bal_sheet_or_pl').find('option:selected').attr('value') == "Profit & Loss"){
+      $('.bs-or-pl-select .profit-loss').show();
+      $('.bs-or-pl-select .profit-loss').first().attr('selected','selected');
+      $('.bs-or-pl-select .balance-sheet').hide();
+    }
+    else if($('#income_bal_sheet_or_pl').find('option:selected').attr('value') == "Balance Sheet"){
+      $('.bs-or-pl-select .balance-sheet').show();
+      $('.bs-or-pl-select .balance-sheet').first().attr('selected','selected');
+      $('.bs-or-pl-select .profit-loss').hide();
+    }
+  });
+  $('#expense_bal_sheet_or_pl').trigger('change');
+  $('#income_bal_sheet_or_pl').trigger('change');
+});
 
 $(document).ready(function(){
   $(document.body).on("click", '#link-to-medicine', function(){
