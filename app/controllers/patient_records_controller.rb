@@ -31,7 +31,6 @@ class PatientRecordsController < ApplicationController
   def create
     @patient = Patient.find(params[:patient_id])
     @patient_record = PatientRecord.new(patient_record_params)
-    binding.pry
 
     respond_to do |format|
       if @patient_record.save
@@ -49,7 +48,6 @@ class PatientRecordsController < ApplicationController
   # PATCH/PUT /patient_records/1.json
   def update
     @patient = Patient.find(params[:patient_id])
-    binding.pry
     respond_to do |format|
       if @patient_record.update(patient_record_params)
         format.html { redirect_to [@patient, @patient_record], notice: 'Patient record was successfully updated.' }

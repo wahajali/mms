@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141116043637) do
+ActiveRecord::Schema.define(version: 20141116190844) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 20141116043637) do
   create_table "bs_or_pl_categories", force: true do |t|
     t.string   "name"
     t.string   "bl_or_pl"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "business_categories", force: true do |t|
+    t.string   "name"
+    t.string   "business_centerable_type"
+    t.integer  "business_centerable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -113,6 +121,7 @@ ActiveRecord::Schema.define(version: 20141116043637) do
     t.integer  "bs_or_pl_category_id"
     t.string   "voucher_or_ref_details"
     t.string   "unique_identifier"
+    t.integer  "business_category_id"
   end
 
   create_table "family_histories", force: true do |t|
@@ -156,6 +165,7 @@ ActiveRecord::Schema.define(version: 20141116043637) do
     t.string   "bal_sheet_or_pl"
     t.string   "voucher_or_ref_details"
     t.string   "unique_identifier"
+    t.integer  "business_category_id"
   end
 
   create_table "institutes", force: true do |t|

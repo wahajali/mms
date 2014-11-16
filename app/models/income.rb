@@ -15,6 +15,9 @@
 #  updated_at             :datetime
 #  bs_or_pl_category_id   :integer
 #  bal_sheet_or_pl        :string(255)
+#  voucher_or_ref_details :string(255)
+#  unique_identifier      :string(255)
+#  business_category_id   :integer
 #
 
 class Income < ActiveRecord::Base
@@ -23,6 +26,7 @@ class Income < ActiveRecord::Base
   belongs_to :income_type
   belongs_to :bs_or_pl_category
   belongs_to :cost_centerable, polymorphic: true
+  belongs_to :business_category
   
   validates :amount, :date, presence: true, allow_blank: false
 end

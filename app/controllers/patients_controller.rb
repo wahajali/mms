@@ -33,7 +33,6 @@ class PatientsController < ApplicationController
   # POST /patients
   # POST /patients.json
   def create
-    binding.pry
     @patient = Patient.new(patient_params)
 
     respond_to do |format|
@@ -44,7 +43,6 @@ class PatientsController < ApplicationController
         @address = @patient.address
         @phone_numbers = @patient.phone_numbers
         @diseases = Disease.all
-        binding.pry
         format.html { render :new }
         format.json { render json: @patient.errors, status: :unprocessable_entity }
       end

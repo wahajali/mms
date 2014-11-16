@@ -15,19 +15,26 @@
     </div>
   <% end %>
 
-  <%= f.date_field :date, :value => Date.today %>
-  <%= f.collection_select(:expense_category_id, ExpenseCategory.all, :id, :name, {prompt: true}) %>
-  <%= f.collection_select(:expense_sub_category_id, ExpenseSubCategory.all, :id, :name, {prompt: true}) %>
-  <%= f.collection_select(:expense_type_id, ExpenseType.all, :id, :name, {prompt: true}) %>
-  <%= f.select(:bal_sheet_or_pl, [["Balance Sheet", "Balance Sheet"], ["Profit & Loss", "Profit & Loss"]], {include_blank: false, label: 'BS or P&L'}, selected: "Balance Sheet") %>
-  <%= f.select(:bs_or_pl_category_id, options_for_select(BsOrPlCategory.all.map{ |c| [c.name, c.id, {'class' => c.get_name }]}), {label: 'BS or P&L Category'}, class: 'bs-or-pl-select') %>
-  <%= f.text_field :receipient, placeholder: 'Receipient Name' %>
-  <%= f.number_field :amount, placeholder: 'Amount' %>
   <% if @expense.cost_centerable.nil? %>
     <%= f.collection_select(:cost_centerable_id, cost_centers, :value, :name, {prompt: true, label: 'Business Center'}) %>
   <% else %>
     <%= f.collection_select(:cost_centerable_id, cost_centers, :value, :name, {prompt: true, label: 'Business Center', selected: @expense.cost_centerable.value}) %>
   <% end %>
+  <% if @expense.business_category.nil? %>
+    <%= f.collection_select(:business_category_id, {}, :value, :name, {prompt: true, label: 'Business Category'}) %>
+  <% else %>
+    <%= f.collection_select(:business_category_id, cost_centers, :value, :name, {prompt: true, label: 'Business Category', selected: @expense.cost_centerable.value}) %>
+  <% end %>
+  <%= f.date_field :date, :value => Date.today %>
+  <%= f.collection_select(:expense_category_id, ExpenseCategory.all, :id, :name, {prompt: true}) %>
+  <%= f.collection_select(:expense_sub_category_id, ExpenseSubCategory.all, :id, :name, {prompt: true}) %>
+  <%= f.collection_select(:expense_type_id, ExpenseType.all, :id, :name, {prompt: true}) %>
+  <%= f.text_field :receipient, placeholder: 'Receipient Name' %>
+  <%= f.text_field :unique_identifier %>
+  <%= f.text_field :voucher_or_ref_details, placeholder: 'Voucher Details', label: 'Voucher or Reference Details' %>
+  <%= f.number_field :amount, placeholder: 'Amount' %>
+  <%= f.select(:bal_sheet_or_pl, [["Balance Sheet", "Balance Sheet"], ["Profit & Loss", "Profit & Loss"]], {include_blank: false, label: 'BS or P&L'}, selected: "Balance Sheet") %>
+  <%= f.select(:bs_or_pl_category_id, options_for_select(BsOrPlCategory.all.map{ |c| [c.name, c.id, {'class' => c.get_name }]}), {label: 'BS or P&L Category'}, class: 'bs-or-pl-select') %>
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

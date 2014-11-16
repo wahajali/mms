@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'business_categories/get_categories' => 'business_categories#get_categories'
+
+  resources :business_categories 
+
   resources :bs_or_pl_categories
 
   resources :incomes

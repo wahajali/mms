@@ -15,6 +15,9 @@
 #  expense_sub_category_id :integer
 #  bal_sheet_or_pl         :string(255)
 #  bs_or_pl_category_id    :integer
+#  voucher_or_ref_details  :string(255)
+#  unique_identifier       :string(255)
+#  business_category_id    :integer
 #
 
 require 'test_helper'

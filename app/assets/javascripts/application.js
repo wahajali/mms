@@ -61,6 +61,31 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
+  $('#expense_cost_centerable_id').change(function(){
+    $.ajax({
+      url: '/business_categories/get_categories',
+      type: 'GET',
+      data: { value: $(this).val() },
+      dataType: 'script'
+    })
+  });
+});
+
+$(document).ajaxStart(function () {
+  $.blockUI({ css: { 
+    border: 'none', 
+    padding: '15px', 
+    backgroundColor: '#000', 
+    '-webkit-border-radius': '10px', 
+    '-moz-border-radius': '10px', 
+    opacity: .5, 
+    color: '#fff' 
+  } }); 
+});
+
+$(document).ajaxStop($.unblockUI); 
+
+$(document).ready(function(){
   $('#family-history, #previous-diseases').parent().find('option').bind("contextmenu", function(){
     var left  = ($(window).width()/2) - 200;
     var t = ($(window).height()/2);

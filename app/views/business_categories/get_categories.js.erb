@@ -1,0 +1,1 @@
+$('#expense_business_category_id').html('<option value="">Please select</option> <%= options_for_select(@business_categories.map { |cat| [cat.name, cat.id] }, prompt: true) %>');
