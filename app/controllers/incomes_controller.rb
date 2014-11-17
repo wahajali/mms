@@ -42,6 +42,8 @@ class IncomesController < ApplicationController
   # PATCH/PUT /incomes/1
   # PATCH/PUT /incomes/1.json
   def update
+    income_params["cost_centerable_type"] = income_params["cost_centerable_id"].split(';').first
+    income_params["cost_centerable_id"] = income_params["cost_centerable_id"].split(';').last
     respond_to do |format|
       if @income.update(income_params)
         format.html { redirect_to @income, notice: 'Income was successfully updated.' }

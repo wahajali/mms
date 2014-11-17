@@ -25,8 +25,9 @@ class Expense < ActiveRecord::Base
   belongs_to :expense_sub_category
   belongs_to :expense_type
   belongs_to :bs_or_pl_category
+  belongs_to :bs_or_pl_sub_category
   belongs_to :cost_centerable, polymorphic: true
   belongs_to :business_category
   
-  validates :amount, :date, :bal_sheet_or_pl, presence: true, allow_blank: false
+  validates :amount, :date, :bal_sheet_or_pl, :expense_category, :business_category, :cost_centerable, presence: true, allow_blank: false
 end

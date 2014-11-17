@@ -16,21 +16,23 @@
   <% end %>
 
   <% if @expense.cost_centerable.nil? %>
-    <%= f.collection_select(:cost_centerable_id, cost_centers, :value, :name, {prompt: true, label: 'Business Center'}) %>
+    <%= f.collection_select(:cost_centerable_id, cost_centers, :value, :name, {prompt: true, label: 'Business Center'}, id: 'cost-centerable-id') %>
   <% else %>
-    <%= f.collection_select(:cost_centerable_id, cost_centers, :value, :name, {prompt: true, label: 'Business Center', selected: @expense.cost_centerable.value}) %>
+    <%= f.collection_select(:cost_centerable_id, cost_centers, :value, :name, {prompt: true, label: 'Business Center', selected: @expense.cost_centerable.value}, id: 'cost-centerable-id') %>
   <% end %>
+
   <% if @expense.business_category.nil? %>
-    <%= f.collection_select(:business_category_id, {}, :value, :name, {prompt: true, label: 'Business Category'}) %>
+    <%= f.collection_select(:business_category_id, {}, :id, :name, {prompt: true, label: 'Business Category'}, id: 'business-category-id') %>
   <% else %>
-    <%= f.collection_select(:business_category_id, cost_centers, :value, :name, {prompt: true, label: 'Business Category', selected: @expense.cost_centerable.value}) %>
+    <%= f.collection_select(:business_category_id, @expense.cost_centerable.business_categories, :id, :name, {prompt: true, label: 'Business Category', selected: @expense.business_category.id}, id: 'business-category-id') %>
   <% end %>
+  
   <%= f.date_field :date, :value => Date.today %>
   <%= f.collection_select(:expense_category_id, ExpenseCategory.all, :id, :name, {prompt: true}) %>
   <%= f.collection_select(:expense_sub_category_id, ExpenseSubCategory.all, :id, :name, {prompt: true}) %>
   <%= f.collection_select(:expense_type_id, ExpenseType.all, :id, :name, {prompt: true}) %>
   <%= f.text_field :receipient, placeholder: 'Receipient Name' %>
-  <%= f.text_field :unique_identifier %>
+  <%= f.text_field :unique_identifier, placeholder: 'Unique Identifier' %>
   <%= f.text_field :voucher_or_ref_details, placeholder: 'Voucher Details', label: 'Voucher or Reference Details' %>
   <%= f.number_field :amount, placeholder: 'Amount' %>
   <%= f.select(:bal_sheet_or_pl, [["Balance Sheet", "Balance Sheet"], ["Profit & Loss", "Profit & Loss"]], {include_blank: false, label: 'BS or P&L'}, selected: "Balance Sheet") %>

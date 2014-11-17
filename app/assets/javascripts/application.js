@@ -22,6 +22,7 @@
 
 $(document).ready(function(){
   $('#expense_bal_sheet_or_pl').change(function(){
+    //for expense page
     if($('#expense_bal_sheet_or_pl').find('option:selected').attr('value') == "Profit & Loss"){
       $('.bs-or-pl-select .profit-loss').show();
       $('.bs-or-pl-select .profit-loss').first().attr('selected','selected');
@@ -34,6 +35,7 @@ $(document).ready(function(){
     }
   });
   $('#income_bal_sheet_or_pl').change(function(){
+    //for income page
     if($('#income_bal_sheet_or_pl').find('option:selected').attr('value') == "Profit & Loss"){
       $('.bs-or-pl-select .profit-loss').show();
       $('.bs-or-pl-select .profit-loss').first().attr('selected','selected');
@@ -45,6 +47,7 @@ $(document).ready(function(){
       $('.bs-or-pl-select .profit-loss').hide();
     }
   });
+
   $('#expense_bal_sheet_or_pl').trigger('change');
   $('#income_bal_sheet_or_pl').trigger('change');
 });
@@ -61,7 +64,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-  $('#expense_cost_centerable_id').change(function(){
+  $('#cost-centerable-id').change(function(){
     $.ajax({
       url: '/business_categories/get_categories',
       type: 'GET',

@@ -1,27 +1,25 @@
-<%- model_class = BusinessCategory -%>
+<%- model_class = BsOrPlSubCategory -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1>Balance Sheet and Profit and Loss Categories</h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th>Business Center</th>
-      <th>Business Center Name</th>
+      <th>Parent BS or PL Category</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
-    <% @business_categories.each do |business_category| %>
+    <% @bs_or_pl_sub_categories.each do |bs_or_pl_sub_category| %>
       <tr>
-        <td><%= business_category.name %></td>
-        <td><%= business_category.business_centerable.class %></td>
-        <td><%= business_category.business_centerable.common_data.name %></td>
+        <td><%= link_to(bs_or_pl_sub_category.name, bs_or_pl_sub_category_path(bs_or_pl_sub_category)) %></td>
+        <td><%= bs_or_pl_sub_category.bs_or_pl_category.name %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_business_category_path(business_category), :class => 'btn btn-default btn-xs' %>
+                      edit_bs_or_pl_sub_category_path(bs_or_pl_sub_category), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      business_category_path(business_category),
+                      bs_or_pl_sub_category_path(bs_or_pl_sub_category),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
@@ -32,5 +30,5 @@
 </table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_business_category_path,
+            new_bs_or_pl_sub_category_path,
             :class => 'btn btn-primary' %>

@@ -16,16 +16,23 @@
   <% end %>
 
   <% if @income.cost_centerable.nil? %>
-    <%= f.collection_select(:cost_centerable_id, cost_centers, :value, :name, {prompt: true, label: 'Business Center'}) %>
+    <%= f.collection_select(:cost_centerable_id, cost_centers, :value, :name, {prompt: true, label: 'Business Center'}, id: 'cost-centerable-id') %>
   <% else %>
-    <%= f.collection_select(:cost_centerable_id, cost_centers, :value, :name, {prompt: true, label: 'Business Center', selected: @income.cost_centerable.value}) %>
+    <%= f.collection_select(:cost_centerable_id, cost_centers, :value, :name, {prompt: true, label: 'Business Center', selected: @income.cost_centerable.value}, id: 'cost-centerable-id') %>
   <% end %>
+
+  <% if @income.business_category.nil? %>
+    <%= f.collection_select(:business_category_id, {}, :id, :name, {prompt: true, label: 'Business Category'}, id: 'business-category-id') %>
+  <% else %>
+    <%= f.collection_select(:business_category_id, @income.cost_centerable.business_categories, :id, :name, {prompt: true, label: 'Business Category', selected: @income.business_category.id}, id: 'business-category-id') %>
+  <% end %>
+
   <%= f.date_field :date, :value => Date.today %>
   <%= f.collection_select(:income_category_id, IncomeCategory.all, :id, :name, {prompt: true}) %>
   <%= f.collection_select(:income_sub_category_id, IncomeSubCategory.all, :id, :name, {prompt: true}) %>
   <%= f.collection_select(:income_type_id, IncomeType.all, :id, :name, {prompt: true}) %>
   <%= f.text_field :benefactor, placeholder: 'Benefactor Name' %>
-  <%= f.text_field :unique_identifier %>
+  <%= f.text_field :unique_identifier, placeholder: 'Unique Identifier' %>
   <%= f.text_field :voucher_or_ref_details, placeholder: 'Voucher Details', label: 'Voucher or Reference Details' %>
   <%= f.number_field :amount, placeholder: 'Amount' %>
   <%= f.select(:bal_sheet_or_pl, [["Balance Sheet", "Balance Sheet"], ["Profit & Loss", "Profit & Loss"]], {include_blank: false, label: 'BS or P&L'}, selected: "Balance Sheet") %>
