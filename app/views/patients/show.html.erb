@@ -84,6 +84,37 @@
   </table>
 <% end %>
 
+<% if @patient.legacy_cards.any? %>
+  <div class="page-header">
+    <h3><%=t '.title', :default => 'Legacy Appointment Cards' %></h3>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Appointment Card</th>
+        <th>Appointment Date</th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @patient.legacy_cards.each do |card| %>
+        <tr>
+          <td><%= link_to(image_tag(card.card.url(:thumb)), root_path) %></td>
+          <td><%= card.appointment_date %></td>
+          <td>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              legacy_card_path(card),
+              :method => :delete,
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-xs btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
 <%= link_to t('.back', :default => t("helpers.links.back")),
   patients_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -94,3 +125,4 @@
   :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
   :class => 'btn btn-danger' %>
 <%= link_to 'New Record', new_patient_patient_record_path(@patient), :class => 'btn btn-default'  %>
+<%= link_to 'Add Legacy Photo', edit_legacy_card_patient_path(@patient), :class => 'btn btn-default'  %>

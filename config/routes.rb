@@ -43,7 +43,13 @@ Rails.application.routes.draw do
 
   resources :patients do 
     resources :patient_records, except: [:index]
+    member do 
+      patch 'add_legacy_card'
+      get 'edit_legacy_card'
+    end
   end
+
+  resources :legacy_cards, only: [:destroy]
 
   resources :manufacturings
 

@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  before_action :set_patient, only: [:show, :edit, :update, :destroy]
+  before_action :set_patient, only: [:show, :edit, :update, :destroy, :add_legacy_card, :edit_legacy_card]
 
   # GET /patients
   # GET /patients.json
@@ -76,6 +76,26 @@ class PatientsController < ApplicationController
     end
   end
 
+  # POST
+  def add_legacy_card
+    respond_to do |format|
+      @patient.legacy_cards.build(patient_params['legacy_card'])
+      if @patient.save
+        format.html { redirect_to @patient, notice: 'Patient was successfully updated.' }
+        format.json { render :show, status: :ok, location: @patient }
+      else
+        @patient.legacy_cards.build
+        format.html { render :edit_legacy_card }
+        format.json { render json: @patient.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET
+  def edit_legacy_card
+    @card = @patient.legacy_cards.build
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_patient
@@ -84,6 +104,7 @@ class PatientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def patient_params
-      params.require(:patient).permit(:card_no, :card_date, :first_name, :last_name, :fathers_name, :mothers_name, :husbands_name, :dob, :referred_by, :gender, :marital_status, :blood_group, :patient_type, :financial_type, :treatment_type, phone_numbers_attributes: [:number, :number_type], address_attributes: [:line1, :line2, :city, :zip_code], family_history_disease_ids: [], previous_disease_ids: [])
+      params.require(:patient).permit!
+      #params.require(:patient).permit(:card_no, :card_date, :first_name, :last_name, :fathers_name, :mothers_name, :husbands_name, :dob, :referred_by, :gender, :marital_status, :blood_group, :patient_type, :financial_type, :treatment_type, phone_numbers_attributes: [:number, :number_type], address_attributes: [:line1, :line2, :city, :zip_code], family_history_disease_ids: [], previous_disease_ids: [])
     end
 end

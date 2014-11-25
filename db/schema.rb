@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117062539) do
+ActiveRecord::Schema.define(version: 20141117170246) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -183,6 +183,17 @@ ActiveRecord::Schema.define(version: 20141117062539) do
   create_table "laboratories", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "legacy_cards", force: true do |t|
+    t.integer  "patient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "card_file_name"
+    t.string   "card_content_type"
+    t.integer  "card_file_size"
+    t.datetime "card_updated_at"
+    t.date     "appointment_date"
   end
 
   create_table "manufacturings", force: true do |t|

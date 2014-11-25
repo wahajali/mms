@@ -1,15 +1,15 @@
 <%= bootstrap_form_for @patient, :html => { :class => "form-horizontal patient" } do |f| %>
 
-    <% if @patient.errors.any? %>
+  <% if @patient.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
         <h3 class="panel-title"><%= pluralize(@patient.errors.count, "error") %> prohibited this patient from being saved:</h3>
       </div>
       <div class="panel-body">
         <ul>
-        <% @patient.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
+          <% @patient.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
         </ul>
       </div>
     </div>
@@ -40,4 +40,4 @@
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
     patients_path, :class => 'btn btn-default' %>
 
-  <% end %>
+<% end %>

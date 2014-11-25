@@ -33,6 +33,10 @@ GEM
     arel (5.0.1.20140414130214)
     bootstrap_form (2.1.1)
     builder (3.2.2)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.4)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -75,6 +79,11 @@ GEM
     multi_json (1.10.1)
     mysql2 (0.3.16)
     nested_form (0.3.2)
+    paperclip (4.2.0)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     polyglot (0.3.5)
     pry (0.10.0)
       coderay (~> 1.1.0)
@@ -169,6 +178,7 @@ DEPENDENCIES
   less-rails
   mysql2
   nested_form
+  paperclip (~> 4.2)
   pry
   rails (= 4.1.0)
   sass-rails (~> 4.0.3)

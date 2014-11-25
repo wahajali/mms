@@ -33,6 +33,8 @@ class Patient < ActiveRecord::Base
   has_many :previous_illnesses
   has_many :previous_diseases, through: :previous_illnesses, source: :disease
   #has_many :treatments, through: :previous_illnesses TODO
+  
+  has_many :legacy_cards
 
   validates :first_name, :last_name, presence: true, allow_blank: false
 
@@ -42,6 +44,7 @@ class Patient < ActiveRecord::Base
   accepts_nested_attributes_for :previous_illnesses
   accepts_nested_attributes_for :previous_diseases
   accepts_nested_attributes_for :family_history_diseases
+  accepts_nested_attributes_for :legacy_cards
 
   def name
     first_name + ' ' + last_name

@@ -1,0 +1,7 @@
+<%= bootstrap_form_for @patient, method: :patch, url: add_legacy_card_patient_path(@patient), :html => { multipart: true, :class => "form-horizontal patient" } do |f| %>
+  <%= f.fields_for @card do |g| %>
+    <%= g.date_field :appointment_date %>
+    <%= g.file_field :card %>
+  <% end %>
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+<% end %>
