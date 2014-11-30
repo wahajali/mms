@@ -1,0 +1,48 @@
+<%= bootstrap_nested_form_for @patient, method: :post, url: update_diseases_patient_path(@patient), :html => { :class => "form-horizontal patient-diseases-form" } do |g| %>
+
+  <% if @patient.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@patient.errors.count, "error") %> prohibited this patient from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <% @patient.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= g.fields_for :diagnosed_associated_diseases do |b| %>
+    <div class='diseases'>
+      <%= b.collection_select(:disease_id, @diseases, :id, :name, {label: 'Diagnosed Associated Disease', :prompt => true}) %>
+      <%= b.fields_for :progresses do |c| %>
+        <%= c.text_field :percentage, class: 'slider-percentage', label: 'Percentage Progress' %>
+        <%= c.date_field :progress_date, value: Date.today %>
+        <%= c.text_area :additional_note %>
+      <% end %>
+      <%= b.link_to_remove "Remove this disease" %>
+    </div>
+  <% end %>
+  <%= g.link_to_add "Add an associated disease", :diagnosed_associated_diseases, id: 'link-to-associated-disease' %></br></br>
+
+  <%= g.fields_for :diagnosed_main_diseases do |b| %>
+    <div class='diseases'>
+      <%= b.collection_select(:disease_id, @diseases, :id, :name, {label: 'Diagnosed Main Disease', :prompt => true}) %>
+      <%= b.fields_for :progresses do |c| %>
+        <%= c.text_field :percentage, class: 'slider-percentage', label: 'Percentage Progress' %>
+        <%= c.date_field :progress_date, value: Date.today %>
+        <%= c.text_area :additional_note %>
+      <% end %>
+      <%= b.link_to_remove "Remove this disease" %>
+    </div>
+  <% end %>
+  <%= g.link_to_add "Add a main disease", :diagnosed_main_diseases, id: 'link-to-main-disease' %></br></br>
+
+  <%= g.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+    patient_path(@patient), :class => 'btn btn-default' %>
+
+  <% end %>
