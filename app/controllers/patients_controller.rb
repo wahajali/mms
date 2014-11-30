@@ -80,36 +80,42 @@ class PatientsController < ApplicationController
   # use this to get patient record form
   def patient_record_form
     get_diseases
+    respond_to do |format|
+      #format.html { redirect_to patients_url, notice: 'Patient was successfully updated.' }
+      format.js
+    end
   end
 
   # POST
   # use this to create patient record
   def update_diseases
-    binding.pry
-=begin
-    if params[:patient][:diagnosed_associated_diseases_attributes].any?
-      params[:patient][:diagnosed_associated_diseases_attributes].each do |k, v|
-        @patient.diagnosed_associated_diseases.create(disease_id: v[:disease_id], progress: v[:progress])
+    if params[:patient][:diagnosed_associated_diseases_attributes].present?
+      params[:patient][:diagnosed_associated_diseases_attributes].select{ |k, v| v["_destroy"] == "false" }.each do |k, v| 
+        @patient.diagnosed_associated_diseases.build(disease_id: v[:disease_id]).progresses.build(percentage: v[:progress][:percentage], progress_date: v[:progress][:progress_date], additional_note: v[:progress][:additional_note])
+      end
+    end
+    if params[:patient][:diagnosed_main_diseases_attributes].present?
+      params[:patient][:diagnosed_main_diseases_attributes].select{ |k, v| v["_destroy"] == "false" }.each do |k, v| 
+        @patient.diagnosed_main_diseases.build(disease_id: v[:disease_id]).progresses.build(percentage: v[:progress][:percentage], progress_date: v[:progress][:progress_date], additional_note: v[:progress][:additional_note])
       end
     end
 
-    if params[:patient][:diagnosed_main_diseases_attributes].any?
-      params[:patient][:diagnosed_main_diseases_attributes].each do |k, v|
-        @patient.diagnosed_main_diseases.create(disease_id: v[:disease_id], progress: v[:progress])
-      end
-    end
-=end 
     #TODO instead of redirect, do render.
     respond_to do |format|
-      format.html { redirect_to patients_url, notice: 'Patient was successfully updated.' }
-      format.json { head :no_content }
+      if @patient.save
+        format.html { redirect_to patients_url, notice: 'Patient was successfully updated.' }
+        format.js
+      else
+        format.html { redirect_to patients_url, notice: 'Patient was successfully updated.' }
+        format.js
+      end
     end
   end
 
   # POST
   def add_legacy_card
+    @patient.legacy_cards.build(patient_params['appointment_cards'])
     respond_to do |format|
-      @patient.legacy_cards.build(patient_params['appointment_cards'])
       if @patient.save
         format.html { redirect_to @patient, notice: 'Patient was successfully updated.' }
         format.json { render :show, status: :ok, location: @patient }

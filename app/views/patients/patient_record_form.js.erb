@@ -1,0 +1,8 @@
+$('#patient-disease-modal').html('<%= escape_javascript(render partial: 'patient_record_form') %>');
+$('#link-to-associated-disease, #link-to-main-disease').on('click', function(){
+  setTimeout("$('.slider-percentage').slider({min: 0, max: 100})", 10);
+});
+$('.patient-diseases-form').on('slideStop', '.slider-percentage', function(e){
+  $(e.currentTarget).slider('setValue', e.value);
+});
+$('#patient-disease-modal').modal({show: true, keyboard: false, backdrop: false})

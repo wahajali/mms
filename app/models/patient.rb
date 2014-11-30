@@ -53,9 +53,9 @@ class Patient < ActiveRecord::Base
   accepts_nested_attributes_for :family_histories
   accepts_nested_attributes_for :family_history_diseases
   accepts_nested_attributes_for :legacy_cards
-  accepts_nested_attributes_for :diagnosed_main_diseases
+  accepts_nested_attributes_for :diagnosed_main_diseases, allow_destroy: true
   accepts_nested_attributes_for :main_diseases
-  accepts_nested_attributes_for :diagnosed_associated_diseases
+  accepts_nested_attributes_for :diagnosed_associated_diseases, allow_destroy: true
   accepts_nested_attributes_for :associated_diseases
 
   def name
