@@ -15,9 +15,10 @@
     </div>
   <% end %>
 
+  <%= render partial: 'diseases_modal' %>
+
   <%= f.date_field :visit_date_english, :value => Date.today %>
   <%= f.collection_select(:doctor_id, Doctor.all, :id, :name, {label: 'Attending Doctor', :prompt => true}) %>
-  <%= f.collection_select(:disease_id, Disease.all, :id, :name, {label: 'Diagnosed Disease', :prompt => true}) %>
   <%= f.select(:visit_day, [["Monday", "Monday"], ["Tueday", "Tueday"], ["Wednesday", "Wednesday"], ["Thursday", "Thursday"], ["Friday", "Friday"], ["Saturday", "Saturday"], ["Sunday", "Sunday"]]) %>
   <%= f.text_field :handling_person %>
   <%= f.hidden_field :patient_id, value: @patient.id %>
@@ -50,6 +51,8 @@
     </div>
   <% end %>
   <%= f.link_to_add "Add a prescription", :prescriptions, id: 'link-to-add-prescription' %></br></br>
+
+  <%= link_to "Manage Diseases", patient_record_form_patient_path(@patient), remote: true, data: {toggle: "modal", target: "#myModal"} %></br></br>
 
   <%#= f.collection_select(:medicine_ids, @medicine_homeo, :id, :name, {label: 'Prescribed Homeo Medicines'}, {id: 'prescribed-medicine-homeo'}) %>
 

@@ -1,6 +1,21 @@
 <%= bootstrap_form_for @patient, method: :patch, url: add_legacy_card_patient_path(@patient), :html => { multipart: true, :class => "form-horizontal patient" } do |f| %>
-  <%= f.fields_for @card do |g| %>
+  <% if @patient.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@patient.errors.count, "error") %> prohibited this patient from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <% @patient.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+  <%= f.fields_for :appointment_cards, @card do |g| %>
     <%= g.date_field :appointment_date %>
+    <%= g.text_field :name %>
     <%= g.file_field :card %>
   <% end %>
   <%= f.submit nil, :class => 'btn btn-primary' %>

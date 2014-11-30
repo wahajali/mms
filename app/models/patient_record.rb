@@ -20,14 +20,13 @@
 #  conducted_physical_examination :text
 #  created_at                     :datetime
 #  updated_at                     :datetime
-#  disease_id                     :integer
 #  investigation_and_report       :text
+#  additional_notes               :text
 #
 
 class PatientRecord < ActiveRecord::Base
   belongs_to :patient
   belongs_to :doctor
-  belongs_to :disease
 
   has_many :prescriptions
   has_many :medicines, through: :prescriptions

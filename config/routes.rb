@@ -42,6 +42,10 @@ Rails.application.routes.draw do
   end
 
   resources :patients do 
+    member do 
+      get 'patient_record_form'
+      post 'update_diseases'
+    end
     resources :patient_records, except: [:index]
     member do 
       patch 'add_legacy_card'

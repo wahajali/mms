@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117170246) do
+ActiveRecord::Schema.define(version: 20141129152049) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -81,6 +81,20 @@ ActiveRecord::Schema.define(version: 20141117170246) do
     t.datetime "updated_at"
   end
 
+  create_table "diagnosed_associated_diseases", force: true do |t|
+    t.integer  "disease_id"
+    t.integer  "patient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "diagnosed_main_diseases", force: true do |t|
+    t.integer  "disease_id"
+    t.integer  "patient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "diseases", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -126,9 +140,10 @@ ActiveRecord::Schema.define(version: 20141117170246) do
     t.integer  "expense_sub_category_id"
     t.string   "bal_sheet_or_pl"
     t.integer  "bs_or_pl_category_id"
-    t.string   "voucher_or_ref_details"
+    t.text     "voucher_or_ref_details"
     t.string   "unique_identifier"
     t.integer  "business_category_id"
+    t.integer  "bs_or_pl_sub_category_id"
   end
 
   create_table "family_histories", force: true do |t|
@@ -170,9 +185,10 @@ ActiveRecord::Schema.define(version: 20141117170246) do
     t.datetime "updated_at"
     t.integer  "bs_or_pl_category_id"
     t.string   "bal_sheet_or_pl"
-    t.string   "voucher_or_ref_details"
+    t.text     "voucher_or_ref_details"
     t.string   "unique_identifier"
     t.integer  "business_category_id"
+    t.integer  "bs_or_pl_sub_category_id"
   end
 
   create_table "institutes", force: true do |t|
@@ -194,6 +210,7 @@ ActiveRecord::Schema.define(version: 20141117170246) do
     t.integer  "card_file_size"
     t.datetime "card_updated_at"
     t.date     "appointment_date"
+    t.string   "name"
   end
 
   create_table "manufacturings", force: true do |t|
@@ -248,8 +265,8 @@ ActiveRecord::Schema.define(version: 20141117170246) do
     t.text     "conducted_physical_examination"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "disease_id"
     t.text     "investigation_and_report"
+    t.text     "additional_notes"
   end
 
   create_table "patients", force: true do |t|
@@ -270,6 +287,8 @@ ActiveRecord::Schema.define(version: 20141117170246) do
     t.string   "treatment_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "family_history_description"
+    t.text     "additional_notes"
   end
 
   create_table "pharmacies", force: true do |t|
@@ -300,6 +319,16 @@ ActiveRecord::Schema.define(version: 20141117170246) do
     t.integer  "patient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "progresses", force: true do |t|
+    t.string   "progressable_type"
+    t.integer  "progressable_id"
+    t.integer  "percentage"
+    t.date     "progress_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "additional_note"
   end
 
   create_table "stocks", force: true do |t|

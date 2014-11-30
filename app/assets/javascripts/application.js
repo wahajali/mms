@@ -21,36 +21,30 @@
 //
 
 $(document).ready(function(){
-  $('#expense_bal_sheet_or_pl').change(function(){
-    //for expense page
-    if($('#expense_bal_sheet_or_pl').find('option:selected').attr('value') == "Profit & Loss"){
-      $('.bs-or-pl-select .profit-loss').show();
-      $('.bs-or-pl-select .profit-loss').first().attr('selected','selected');
-      $('.bs-or-pl-select .balance-sheet').hide();
+  $('.balance-sheet-or-pl-select').change(function(){
+    if($('.balance-sheet-or-pl-select').find('option:selected').attr('value') == "Profit & Loss"){
+      update_dropdowns('profit-loss', 'balance-sheet');
     }
-    else if($('#expense_bal_sheet_or_pl').find('option:selected').attr('value') == "Balance Sheet"){
-      $('.bs-or-pl-select .balance-sheet').show();
-      $('.bs-or-pl-select .balance-sheet').first().attr('selected','selected');
-      $('.bs-or-pl-select .profit-loss').hide();
+    else if($('.balance-sheet-or-pl-select').find('option:selected').attr('value') == "Balance Sheet"){
+      update_dropdowns('balance-sheet', 'profit-loss');
     }
   });
-  $('#income_bal_sheet_or_pl').change(function(){
-    //for income page
-    if($('#income_bal_sheet_or_pl').find('option:selected').attr('value') == "Profit & Loss"){
-      $('.bs-or-pl-select .profit-loss').show();
-      $('.bs-or-pl-select .profit-loss').first().attr('selected','selected');
-      $('.bs-or-pl-select .balance-sheet').hide();
-    }
-    else if($('#income_bal_sheet_or_pl').find('option:selected').attr('value') == "Balance Sheet"){
-      $('.bs-or-pl-select .balance-sheet').show();
-      $('.bs-or-pl-select .balance-sheet').first().attr('selected','selected');
-      $('.bs-or-pl-select .profit-loss').hide();
-    }
-  });
+  $('.bs-or-pl-select').change(function(){
+    var val = $('.bs-or-pl-select').find('option:selected').attr('value');
+    $('.bs-or-pl-sub-category-select option.' + val).show();
+    $('.bs-or-pl-sub-category-select option').not('.' + val).hide();
+    $('.bs-or-pl-sub-category-select option.' + val).first().attr('selected','selected');
+  })
 
-  $('#expense_bal_sheet_or_pl').trigger('change');
-  $('#income_bal_sheet_or_pl').trigger('change');
+  $('.balance-sheet-or-pl-select').trigger('change');
 });
+
+function update_dropdowns(show, hide){
+  $('.bs-or-pl-select .' + show).show();
+  $('.bs-or-pl-select .' + show).first().attr('selected','selected');
+  $('.bs-or-pl-select .' + hide).hide();
+  $('.bs-or-pl-select').trigger('change');
+}
 
 $(document).ready(function(){
   $(document.body).on("click", '#link-to-medicine', function(){
@@ -61,6 +55,16 @@ $(document).ready(function(){
     var popup = window.open (url, "popup", "width=400, height=300, top=" + t + ", left=" + left);
     return false;
   }); 
+});
+
+$(document).ready(function(){
+  $('.slider-percentage').slider({min: 0, max: 100, step: 1});
+  $('#link-to-associated-disease, #link-to-main-disease').on('click', function(){
+    setTimeout("$('.slider-percentage').slider({min: 0, max: 100})", 10);
+  });
+  $('.patient-diseases-form').on('slideStop', '.slider-percentage', function(e){
+    $(e.currentTarget).slider('setValue', e.value);
+  });
 });
 
 $(document).ready(function(){

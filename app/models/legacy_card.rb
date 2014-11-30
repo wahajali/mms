@@ -11,9 +11,10 @@
 #  card_file_size    :integer
 #  card_updated_at   :datetime
 #  appointment_date  :date
+#  name              :string(255)
 #
 
 class LegacyCard < ActiveRecord::Base
   has_attached_file :card, :styles => { :medium => "300x300>", :thumb => "100x100>" }
-  validates_attachment_content_type :card, :content_type => /\Aimage\/.*\Z/
+  validates_attachment :card, content_type: { content_type: "application/pdf" }
 end

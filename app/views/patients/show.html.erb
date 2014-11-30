@@ -47,6 +47,7 @@
 <% if @patient_records.any? %>
   <%- model_class = PatientRecord -%>
 
+  </br>
   <div class="page-header">
     <h3><%=t '.title', :default => 'Treatment History' %></h3>
   </div>
@@ -100,7 +101,7 @@
     <tbody>
       <% @patient.legacy_cards.each do |card| %>
         <tr>
-          <td><%= link_to(image_tag(card.card.url(:thumb)), root_path) %></td>
+          <td><%= link_to card.name, card.card.url %></td>
           <td><%= card.appointment_date %></td>
           <td>
             <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -126,3 +127,4 @@
   :class => 'btn btn-danger' %>
 <%= link_to 'New Record', new_patient_patient_record_path(@patient), :class => 'btn btn-default'  %>
 <%= link_to 'Add Legacy Photo', edit_legacy_card_patient_path(@patient), :class => 'btn btn-default'  %>
+<%= link_to 'Manage Diseases', patient_record_form_patient_path(@patient), :class => 'btn btn-default'  %>
