@@ -30,5 +30,5 @@ class Income < ActiveRecord::Base
   belongs_to :cost_centerable, polymorphic: true
   belongs_to :business_category
   
-  validates :amount, :date, :bal_sheet_or_pl, :expense_category, :business_category, :cost_centerable, presence: true, allow_blank: false
+  validates :amount, :unique_identifier, :date, :bal_sheet_or_pl, :expense_category, :business_category, :cost_centerable, presence: true, allow_blank: false
 end

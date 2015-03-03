@@ -1,0 +1,35 @@
+<div class="page-header">
+  <h3><%=t '.title', :default => header %></h3>
+</div>
+<% diseases.each do |d| %>
+  <div class="panel panel-info">
+      <div class="panel-heading"><%= d.disease.name %></div>
+      <div class="panel-body">
+        <% if val == 1 %>
+          <%= link_to 'Update Progress', update_associated_disease_form_patient_path(@patient, disease_id: d.disease_id), method: 'get', remote: true %>
+        <% elsif val == 2 %>
+          <%= link_to 'Update Progress', update_main_disease_form_patient_path(@patient, disease_id: d.disease_id), method: 'get', remote: true %>
+        <% end %>
+        <table class="table table-striped">
+          <thead> 
+            <tr>
+              <th>Progress Date</th>
+              <th>Progress Percentage</th>
+              <th>Additional Notes</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          <% d.progresses.sort_by{|e| e.progress_date}.reverse.each do |p| %>
+              <tr>
+                <td><%= p.progress_date %></td>
+                <td><%= p.percentage || "-" %></td>
+                <td><%= p.additional_note %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      </br>
+  </div>
+<% end %>

@@ -22,7 +22,8 @@
   <%= f.text_field :husbands_name, placeholder: 'Husband\'s Name' %>
   <%= f.date_field :dob %>
   <%= render partial: 'shared/address_form', locals: { address: @address, f: f } %>
-  <%= render partial: 'shared/phone_form', locals: { phone_number: @phone_numbers, f: f } %>
+  <%= f.text_field :landline, placeholder: 'Land Line' %> 
+  <%= f.text_field :mobile_number, placeholder: 'Mobile Number as Unique Identifier' %> 
   <%= f.text_field :card_no, placeholder: 'Card Number' %> 
   <%= f.date_field :card_date%>
   <%= f.text_field :referred_by, placeholder: 'Referral' %>

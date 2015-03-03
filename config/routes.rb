@@ -43,8 +43,15 @@ Rails.application.routes.draw do
 
   resources :patients do 
     member do 
-      get 'patient_record_form'
-      post 'update_diseases'
+      get 'add_associated_disease_form'
+      get 'add_main_disease_form'
+      get 'update_associated_disease_form'
+      get 'update_main_disease_form'
+
+      post 'add_associated_disease'
+      post 'add_main_disease'
+      post 'update_associated_disease'
+      post 'update_main_disease'
     end
     resources :patient_records, except: [:index]
     member do 

@@ -22,6 +22,8 @@
 #  updated_at                 :datetime
 #  family_history_description :text
 #  additional_notes           :text
+#  mobile_number              :string(255)
+#  landline                   :text
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

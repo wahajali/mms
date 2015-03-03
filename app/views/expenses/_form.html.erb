@@ -32,7 +32,7 @@
   <%= f.collection_select(:expense_sub_category_id, ExpenseSubCategory.all, :id, :name, {prompt: true}) %>
   <%= f.collection_select(:expense_type_id, ExpenseType.all, :id, :name, {prompt: true}) %>
   <%= f.text_field :receipient, placeholder: 'Receipient Name' %>
-  <%= f.text_field :unique_identifier, placeholder: 'Unique Identifier' %>
+  <%= f.text_field :unique_identifier, placeholder: 'Mobile Number as Unique Identifier', label: 'Mobile Number' %>
   <%= f.text_area :voucher_or_ref_details, placeholder: 'Voucher Details', label: 'Voucher or Reference Details' %>
   <%= f.number_field :amount, placeholder: 'Amount' %>
   <%= f.select(:bal_sheet_or_pl, [["Balance Sheet", "Balance Sheet"], ["Profit & Loss", "Profit & Loss"]], {include_blank: false, label: 'BS or P&L'}, selected: "Balance Sheet", class: 'balance-sheet-or-pl-select') %>

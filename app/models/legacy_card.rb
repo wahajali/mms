@@ -15,6 +15,6 @@
 #
 
 class LegacyCard < ActiveRecord::Base
-  has_attached_file :card, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  has_attached_file :card
   validates_attachment :card, content_type: { content_type: "application/pdf" }
 end

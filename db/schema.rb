@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141129152049) do
+ActiveRecord::Schema.define(version: 20150303030318) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -289,6 +289,8 @@ ActiveRecord::Schema.define(version: 20141129152049) do
     t.datetime "updated_at"
     t.text     "family_history_description"
     t.text     "additional_notes"
+    t.string   "mobile_number"
+    t.text     "landline"
   end
 
   create_table "pharmacies", force: true do |t|

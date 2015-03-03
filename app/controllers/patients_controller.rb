@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  before_action :set_patient, only: [:show, :edit, :update, :destroy, :add_legacy_card, :edit_legacy_card, :patient_record_form, :update_diseases]
+  before_action :set_patient, only: [:show, :edit, :update, :destroy, :add_legacy_card, :edit_legacy_card, :add_associated_disease_form, :add_main_disease_form, :update_associated_disease_form, :update_main_disease_form, :update_diseases, :update_associated_disease, :update_main_disease]
 
   # GET /patients
   # GET /patients.json
@@ -20,13 +20,11 @@ class PatientsController < ApplicationController
     @diseases = Disease.all
     @patient.family_histories.build
     @patient.previous_illnesses.build
-    @phone_numbers = @patient.phone_numbers.build
   end
 
   # GET /patients/1/edit
   def edit
     @address = @patient.address
-    @phone_numbers = @patient.phone_numbers
     @diseases = Disease.all
   end
 
@@ -41,7 +39,6 @@ class PatientsController < ApplicationController
         format.json { render :show, status: :created, location: @patient }
       else
         @address = @patient.address
-        @phone_numbers = @patient.phone_numbers
         @diseases = Disease.all
         format.html { render :new }
         format.json { render json: @patient.errors, status: :unprocessable_entity }
@@ -58,7 +55,6 @@ class PatientsController < ApplicationController
         format.json { render :show, status: :ok, location: @patient }
       else
         @address = @patient.address
-        @phone_numbers = @patient.phone_numbers
         @diseases = Disease.all
         format.html { render :edit }
         format.json { render json: @patient.errors, status: :unprocessable_entity }
@@ -75,9 +71,51 @@ class PatientsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def update_associated_disease_form
+    @disease = @patient.associated_diseases.find(params[:disease_id])
+    @diagnosed_disease = @patient.diagnosed_associated_diseases.find_by_disease_id(params[:disease_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update_associated_disease
+    params.require(:patient).permit!
+    @patient.diagnosed_associated_diseases.find_by_disease_id(params[:disease_id]).progresses.build(params[:patient][:diagnosed_associated_disease][:progress]).save
+    respond_to do |format|
+      format.js
+    end
+  end
   
+  def update_main_disease_form
+  end
+  
+  def update_main_disease
+  end
+
+  def add_associated_disease_form
+    diseases  = @patient.associated_diseases.map(&:id).uniq
+    @diseases = Disease.all.reject{ |a| diseases.include?(a.id) }
+    @associated_disease = @patient.diagnosed_associated_diseases.build
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def add_main_disease_form
+    diseases  = @patient.main_diseases.map(&:id).uniq
+    @diseases = Disease.all.reject{ |a| diseases.include?(a.id) }
+    @main_disease = @patient.diagnosed_main_diseases.build
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # GET
   # use this to get patient record form
+      #post 'add_associated_disease'
+      #post 'add_main_disease'
   def patient_record_form
     get_diseases
     respond_to do |format|

@@ -49,10 +49,21 @@
       <%= b.link_to_remove "Remove this prescription" %>
     </div>
   <% end %>
-  <%= f.link_to_add "Add a prescription", :prescriptions, id: 'link-to-add-prescription' %></br></br>
 
-  <%#= link_to "Manage Diseases", patient_record_form_patient_path(@patient), remote: true, data: {toggle: "modal", target: "#patient-disease-modal"} %>
-  <%= link_to "Manage Diseases", patient_record_form_patient_path(@patient), remote: true %></br></br>
+  <div class='diagnosed-associated-diseases'>
+    <% if @patient.diagnosed_associated_diseases.any? %>
+      <%= render partial: 'diagnosed_diseases', locals: { diseases: @patient.diagnosed_associated_diseases, header: 'Diagnosed Associated Diseases', val: 1 } %>
+    <% end %>
+  </div>
+
+  <div class='diagnosed-main-diseases'>
+    <% if @patient.diagnosed_main_diseases.any? %>
+      <%= render partial: 'diagnosed_diseases', locals: { diseases: @patient.diagnosed_main_diseases, header: 'Diagnosed Main Diseases', val: 2 } %>
+    <% end %>
+  </div>
+
+  <%= link_to "Add Main Diseases", add_main_disease_form_patient_path(@patient), remote: true %></br></br>
+  <%= link_to "Add Associated Diseases", add_associated_disease_form_patient_path(@patient), remote: true %></br></br>
 
   <%#= f.collection_select(:medicine_ids, @medicine_homeo, :id, :name, {label: 'Prescribed Homeo Medicines'}, {id: 'prescribed-medicine-homeo'}) %>
 
@@ -60,4 +71,4 @@
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
     patient_path(@patient), :class => 'btn btn-default' %>
 
-  <% end %>
+<% end %>

@@ -22,11 +22,12 @@
 #  updated_at                 :datetime
 #  family_history_description :text
 #  additional_notes           :text
+#  mobile_number              :string(255)
+#  landline                   :text
 #
 
 class Patient < ActiveRecord::Base
   has_one :address, as: :addressable
-  has_many :phone_numbers, as: :phoneable
   has_many :patient_records
 
   has_many :family_histories
@@ -44,10 +45,10 @@ class Patient < ActiveRecord::Base
 
   has_many :legacy_cards
 
-  validates :first_name, :last_name, presence: true, allow_blank: false
+  validates :first_name, :last_name, :mobile_number, presence: true, allow_blank: false
+  validates :mobile_number, uniqueness: true
 
   accepts_nested_attributes_for :address, allow_destroy: true
-  accepts_nested_attributes_for :phone_numbers, allow_destroy: true
   accepts_nested_attributes_for :previous_illnesses
   accepts_nested_attributes_for :previous_diseases
   accepts_nested_attributes_for :family_histories
