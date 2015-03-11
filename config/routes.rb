@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :stock_items
-
   resources :bs_or_pl_sub_categories
 
   get 'business_categories/get_categories' => 'business_categories#get_categories'
