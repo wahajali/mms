@@ -15,10 +15,12 @@ class IncomeSubCategoriesController < ApplicationController
   # GET /income_sub_categories/new
   def new
     @income_sub_category = IncomeSubCategory.new
+    @income_categories = IncomeCategory.all
   end
 
   # GET /income_sub_categories/1/edit
   def edit
+    @income_categories = IncomeCategory.all
   end
 
   # POST /income_sub_categories
@@ -31,6 +33,7 @@ class IncomeSubCategoriesController < ApplicationController
         format.html { redirect_to @income_sub_category, notice: 'Income sub category was successfully created.' }
         format.json { render :show, status: :created, location: @income_sub_category }
       else
+        @income_categories = IncomeCategory.all
         format.html { render :new }
         format.json { render json: @income_sub_category.errors, status: :unprocessable_entity }
       end
@@ -45,6 +48,7 @@ class IncomeSubCategoriesController < ApplicationController
         format.html { redirect_to @income_sub_category, notice: 'Income sub category was successfully updated.' }
         format.json { render :show, status: :ok, location: @income_sub_category }
       else
+        @income_categories = IncomeCategory.all
         format.html { render :edit }
         format.json { render json: @income_sub_category.errors, status: :unprocessable_entity }
       end
@@ -56,8 +60,13 @@ class IncomeSubCategoriesController < ApplicationController
   def destroy
     @income_sub_category.destroy
     respond_to do |format|
-      format.html { redirect_to income_sub_categories_url, notice: 'Income sub category was successfully destroyed.' }
-      format.json { head :no_content }
+      if @income_sub_category.errors.any?
+        format.html { redirect_to income_sub_categories_url, alert: @income_sub_category.errors.full_messages.first }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to income_sub_categories_url, notice: 'Income sub category was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -69,6 +78,6 @@ class IncomeSubCategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def income_sub_category_params
-      params.require(:income_sub_category).permit(:name)
+      params.require(:income_sub_category).permit!
     end
 end

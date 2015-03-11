@@ -1,5 +1,5 @@
 class ExpenseCategoriesController < ApplicationController
-  before_action :set_expense_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_expense_category, only: [:show, :edit, :update, :destroy, :sub_categories]
 
   # GET /expense_categories
   # GET /expense_categories.json
@@ -19,6 +19,11 @@ class ExpenseCategoriesController < ApplicationController
 
   # GET /expense_categories/1/edit
   def edit
+  end
+
+  # GET /expense_categories/1/sub_categories
+  def sub_categories
+    @sub_categories = @expense_category.expense_sub_categories
   end
 
   # POST /expense_categories
@@ -56,8 +61,13 @@ class ExpenseCategoriesController < ApplicationController
   def destroy
     @expense_category.destroy
     respond_to do |format|
-      format.html { redirect_to expense_categories_url, notice: 'Expense category was successfully destroyed.' }
-      format.json { head :no_content }
+      if @expense_category.errors.any?
+        format.html { redirect_to expense_categories_url, alert: @expense_category.errors.full_messages.first }
+        format.json { head :no_content }
+      else 
+        format.html { redirect_to expense_categories_url, notice: 'Expense category was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 

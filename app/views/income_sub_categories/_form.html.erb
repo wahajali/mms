@@ -16,6 +16,7 @@
   <% end %>
 
   <%= f.text_field :name %>
+  <%= f.collection_select(:income_category_id, @income_categories, :id, :name, { include_blank: false, label: 'Parent Income Category'}, {multiple: false}) %>
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

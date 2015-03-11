@@ -10,6 +10,7 @@
 
 class IncomeCategory < ActiveRecord::Base
   has_many :incomes, dependent: :restrict_with_error
+  has_many :income_sub_categories, dependent: :restrict_with_error
   validates :name, presence: true, allow_blank: false
   validates :name, uniqueness: true
 end

@@ -101,3 +101,27 @@ $(document).ready(function(){
     return false;
   }); 
 });
+
+$(document).ready(function(){
+  $('#expense-category-id').change(function(){
+    var selected_id = $(this).val();
+    var url = '/expense_categories/' + selected_id + '/sub_categories';
+    $.ajax({
+      url: url,
+      type: 'GET',
+      dataType: 'script'
+    })
+  });
+});
+
+$(document).ready(function(){
+  $('#income-category-id').change(function(){
+    var selected_id = $(this).val();
+    var url = '/income_categories/' + selected_id + '/sub_categories';
+    $.ajax({
+      url: url,
+      type: 'GET',
+      dataType: 'script'
+    })
+  });
+});

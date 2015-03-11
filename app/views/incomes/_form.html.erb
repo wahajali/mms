@@ -28,8 +28,19 @@
   <% end %>
 
   <%= f.date_field :date, :value => Date.today %>
-  <%= f.collection_select(:income_category_id, IncomeCategory.all, :id, :name, {prompt: true}) %>
-  <%= f.collection_select(:income_sub_category_id, IncomeSubCategory.all, :id, :name, {prompt: true}) %>
+
+  <% if @income.income_category_id.nil? %>
+    <%= f.collection_select(:income_category_id, IncomeCategory.all, :id, :name, {prompt: true}, id: 'income-category-id') %>
+  <% else %>
+    <%= f.collection_select(:income_category_id, IncomeCategory.all, :id, :name, {prompt: true}, id: 'income-category-id', selected: @income.income_category_id) %>
+  <% end %>
+
+  <% if @income.income_category_id.nil? %>
+    <%= f.collection_select(:income_sub_category_id, [], :id, :name, {prompt: true}, id: 'income-sub-category-id') %>
+  <% else %>
+    <%= f.collection_select(:income_sub_category_id, @income.income_category.income_sub_categories, :id, :name, {prompt: true}, id: 'income-sub-category-id', selected: @income.income_sub_category_id) %>
+<% end %>
+
   <%= f.collection_select(:income_type_id, IncomeType.all, :id, :name, {prompt: true}) %>
   <%= f.text_field :benefactor, placeholder: 'Benefactor Name' %>
   <%= f.text_field :unique_identifier, placeholder: 'Mobile Number as Unique Identifier', label: 'Mobile Number' %>

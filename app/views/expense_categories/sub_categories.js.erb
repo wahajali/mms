@@ -1,0 +1,1 @@
+$('#expense-sub-category-id').html('<%= escape_javascript(options_for_select(@sub_categories.map { |cat| [cat.name, cat.id] }, prompt: true)) %>');

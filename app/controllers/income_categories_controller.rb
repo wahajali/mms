@@ -1,5 +1,5 @@
 class IncomeCategoriesController < ApplicationController
-  before_action :set_income_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_income_category, only: [:show, :edit, :update, :destroy, :sub_categories]
 
   # GET /income_categories
   # GET /income_categories.json
@@ -10,6 +10,10 @@ class IncomeCategoriesController < ApplicationController
   # GET /income_categories/1
   # GET /income_categories/1.json
   def show
+  end
+
+  def sub_categories
+    @sub_categories = @income_category.income_sub_categories
   end
 
   # GET /income_categories/new
@@ -56,8 +60,13 @@ class IncomeCategoriesController < ApplicationController
   def destroy
     @income_category.destroy
     respond_to do |format|
+      if @income_category.errors.any?
+        format.html { redirect_to income_categories_url, alert: @income_category.errors.full_messages.first }
+        format.json { head :no_content }
+      else 
       format.html { redirect_to income_categories_url, notice: 'Income category was successfully destroyed.' }
       format.json { head :no_content }
+      end
     end
   end
 

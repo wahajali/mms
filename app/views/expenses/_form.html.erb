@@ -28,8 +28,19 @@
   <% end %>
   
   <%= f.date_field :date, :value => Date.today %>
-  <%= f.collection_select(:expense_category_id, ExpenseCategory.all, :id, :name, {prompt: true}) %>
-  <%= f.collection_select(:expense_sub_category_id, ExpenseSubCategory.all, :id, :name, {prompt: true}) %>
+
+  <% if @expense.expense_category_id.nil? %>
+    <%= f.collection_select(:expense_category_id, ExpenseCategory.all, :id, :name, {prompt: true}, id: 'expense-category-id') %>
+  <% else %>
+    <%= f.collection_select(:expense_category_id, ExpenseCategory.all, :id, :name, {prompt: true}, id: 'expense-category-id', selected: @expense.expense_category_id) %>
+  <% end %>
+
+  <% if @expense.expense_category_id.nil? %>
+    <%= f.collection_select(:expense_sub_category_id, [], :id, :name, {prompt: true}, id: 'expense-sub-category-id') %>
+  <% else %>
+    <%= f.collection_select(:expense_sub_category_id, @expense.expense_category.expense_sub_categories, :id, :name, {prompt: true}, id: 'expense-sub-category-id', selected: @expense.expense_sub_category_id) %>
+<% end %>
+
   <%= f.collection_select(:expense_type_id, ExpenseType.all, :id, :name, {prompt: true}) %>
   <%= f.text_field :receipient, placeholder: 'Receipient Name' %>
   <%= f.text_field :unique_identifier, placeholder: 'Mobile Number as Unique Identifier', label: 'Mobile Number' %>

@@ -5,32 +5,26 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:date) %></th>
-      <th><%= model_class.human_attribute_name(:income_category_id) %></th>
-      <th><%= model_class.human_attribute_name(:income_sub_category_id) %></th>
-      <th><%= model_class.human_attribute_name(:income_type_id) %></th>
       <th><%= model_class.human_attribute_name(:benefactor) %></th>
+      <th><%= model_class.human_attribute_name(:date) %></th>
+      <th><%= model_class.human_attribute_name(:income_category) %></th>
+      <th><%= model_class.human_attribute_name(:income_subcategory) %></th>
+      <th><%= model_class.human_attribute_name(:income_type) %></th>
       <th><%= model_class.human_attribute_name(:amount) %></th>
-      <th><%= model_class.human_attribute_name(:cost_centerable_id) %></th>
-      <th><%= model_class.human_attribute_name(:cost_centerable_type) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:cost_center) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @incomes.each do |income| %>
       <tr>
-        <td><%= link_to income.id, income_path(income) %></td>
+        <td><%= link_to income.benefactor, income_path(income) %></td>
         <td><%= income.date %></td>
-        <td><%= income.income_category_id %></td>
-        <td><%= income.income_sub_category_id %></td>
-        <td><%= income.income_type_id %></td>
-        <td><%= income.benefactor %></td>
+        <td><%= income.income_category.name %></td>
+        <td><%= income.income_sub_category.name %></td>
+        <td><%= income.income_type.name %></td>
         <td><%= income.amount %></td>
-        <td><%= income.cost_centerable_id %></td>
-        <td><%= income.cost_centerable_type %></td>
-        <td><%=l income.created_at %></td>
+        <td><%= income.cost_centerable.name %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_income_path(income), :class => 'btn btn-default btn-xs' %>

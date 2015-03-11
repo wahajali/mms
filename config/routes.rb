@@ -12,13 +12,21 @@ Rails.application.routes.draw do
 
   resources :income_types
 
-  resources :income_categories
+  resources :income_categories do
+    member do
+      get 'sub_categories'
+    end
+  end
 
   resources :income_sub_categories
 
   resources :expense_sub_categories
 
-  resources :expense_categories
+  resources :expense_categories do 
+    member do
+      get 'sub_categories'
+    end
+  end
 
   resources :expense_types
 
