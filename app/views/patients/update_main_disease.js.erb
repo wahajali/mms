@@ -1,0 +1,2 @@
+$('.diagnosed-main-diseases').html('<%= escape_javascript(render partial: 'patient_records/diagnosed_diseases', locals: { diseases: @patient.diagnosed_main_diseases, header: 'Diagnosed Associated Diseases', val: 1 }) %>');
+$('#patient-disease-modal-main-update').modal('hide');

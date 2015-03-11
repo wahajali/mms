@@ -1,0 +1,42 @@
+<%- model_class = StockItem -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:manufacturer) %></th>
+      <th><%= model_class.human_attribute_name(:cost_centerable_id) %></th>
+      <th><%= model_class.human_attribute_name(:cost_centerable_type) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stock_items.each do |stock_item| %>
+      <tr>
+        <td><%= link_to stock_item.id, stock_item_path(stock_item) %></td>
+        <td><%= stock_item.name %></td>
+        <td><%= stock_item.manufacturer %></td>
+        <td><%= stock_item.cost_centerable_id %></td>
+        <td><%= stock_item.cost_centerable_type %></td>
+        <td><%=l stock_item.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_stock_item_path(stock_item), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      stock_item_path(stock_item),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_stock_item_path,
+            :class => 'btn btn-primary' %>

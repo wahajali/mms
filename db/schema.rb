@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303030318) do
+ActiveRecord::Schema.define(version: 20150305035501) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -291,6 +291,7 @@ ActiveRecord::Schema.define(version: 20150303030318) do
     t.text     "additional_notes"
     t.string   "mobile_number"
     t.text     "landline"
+    t.text     "patient_history_description"
   end
 
   create_table "pharmacies", force: true do |t|
@@ -333,6 +334,13 @@ ActiveRecord::Schema.define(version: 20150303030318) do
     t.text     "additional_note"
   end
 
+  create_table "stock_items", force: true do |t|
+    t.string   "name"
+    t.string   "manufacturer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "stocks", force: true do |t|
     t.integer  "medicine_id"
     t.date     "purchase_date"
@@ -343,6 +351,9 @@ ActiveRecord::Schema.define(version: 20150303030318) do
     t.integer  "present_stock"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "cost_centerable_id"
+    t.string   "cost_centerable_type"
+    t.integer  "business_category_id"
   end
 
   create_table "tradings", force: true do |t|

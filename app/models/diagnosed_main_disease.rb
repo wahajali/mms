@@ -14,5 +14,7 @@ class DiagnosedMainDisease < ActiveRecord::Base
   belongs_to :disease, inverse_of: :diagnosed_main_diseases
   has_many :progresses, as: :progressable
 
+  validates_uniqueness_of :disease_id, :scope => [:patient_id], message: 'Only one instance of the Main Disease can exist for the patient.'
+
   accepts_nested_attributes_for :progresses
 end

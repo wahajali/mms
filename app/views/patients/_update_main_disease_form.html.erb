@@ -1,0 +1,41 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4 class="modal-title" id="patient-disease-modal-title">Update Progress for Main Diseases: <%= @disease.name %></h4>
+    </div>
+    <%= bootstrap_form_for @patient, method: :post, remote: true, url: update_main_disease_patient_path(@patient, disease_id: @disease.id), :html => { :class => "form-horizontal patient-diseases-form" } do |g| %>
+      <div class="modal-body">
+        <% if @patient.errors.any? %>
+          <div id="error_expl" class="panel panel-danger">
+            <div class="panel-heading">
+              <h3 class="panel-title"><%= pluralize(@patient.errors.count, "error") %> prohibited this patient from being saved:</h3>
+            </div>
+            <div class="panel-body">
+              <ul>
+                <% @patient.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+
+        <%= g.fields_for @diagnosed_disease do |b| %>
+          <div class='diseases'>
+            <%= b.fields_for @diagnosed_disease.progresses.build do |c| %>
+              <%= c.text_field :percentage %>
+              <%= c.date_field :progress_date, value: Date.today %>
+              <%= c.text_area :additional_note %>
+            <% end %>
+          </div>
+        <% end %>
+
+        </div>
+        <div class="modal-footer">
+          <%= g.submit 'Save', :class => 'btn btn-primary' %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      <% end %>
+    </div>
+  </div>

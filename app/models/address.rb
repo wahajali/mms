@@ -20,4 +20,9 @@ class Address < ActiveRecord::Base
   validates :city, presence: true
   #validates :addressable_id, presence: true
   #validates :addressable_type, presence: true
+  #
+  
+  def get_address
+    "#{line1} #{line2} #{city}".strip
+  end 
 end

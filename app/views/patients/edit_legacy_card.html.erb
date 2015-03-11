@@ -14,7 +14,7 @@
     </div>
   <% end %>
   <%= f.fields_for :appointment_cards, @card do |g| %>
-    <%= g.date_field :appointment_date %>
+    <%= g.date_field :appointment_date, label: 'Creation Date' %>
     <%= g.text_field :name %>
     <%= g.file_field :card %>
   <% end %>

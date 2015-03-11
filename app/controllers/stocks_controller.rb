@@ -25,6 +25,9 @@ class StocksController < ApplicationController
   # POST /stocks
   # POST /stocks.json
   def create
+    binding.pry
+    stock_params["cost_centerable_type"] = stock_params["cost_centerable_id"].split(';').first
+    stock_params["cost_centerable_id"] = stock_params["cost_centerable_id"].split(';').last
     @stock = Stock.new(stock_params)
 
     respond_to do |format|
@@ -76,6 +79,7 @@ class StocksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stock_params
-      params.require(:stock).permit(:medicine_id, :purchase_date, :purchase_qty, :purchase_details, :purchase_price, :expiry, :present_stock)
+      params.require(:stock).permit!
+      #params.require(:stock).permit(:medicine_id, :purchase_date, :purchase_qty, :purchase_details, :purchase_price, :expiry, :present_stock)
     end
 end

@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  before_action :set_patient, only: [:show, :edit, :update, :destroy, :add_legacy_card, :edit_legacy_card, :add_associated_disease_form, :add_main_disease_form, :update_associated_disease_form, :update_main_disease_form, :update_diseases, :update_associated_disease, :update_main_disease]
+  before_action :set_patient, only: [:show, :edit, :update, :destroy, :add_legacy_card, :edit_legacy_card, :add_associated_disease_form, :add_main_disease_form, :update_associated_disease_form, :update_main_disease_form, :update_diseases, :update_associated_disease, :update_main_disease, :add_main_disease, :add_associated_disease]
 
   # GET /patients
   # GET /patients.json
@@ -72,6 +72,24 @@ class PatientsController < ApplicationController
     end
   end
 
+  def add_associated_disease_form
+    diseases  = @patient.associated_diseases.map(&:id).uniq
+    @diseases = Disease.all.reject{ |a| diseases.include?(a.id) }
+    @associated_disease = @patient.diagnosed_associated_diseases.build
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def add_associated_disease
+    v = params[:patient][:diagnosed_associated_disease]
+    @patient.diagnosed_associated_diseases.build(disease_id: v[:disease_id]).progresses.build(percentage: v[:progress][:percentage], progress_date: v[:progress][:progress_date], additional_note: v[:progress][:additional_note])
+    @patient.save!
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def update_associated_disease_form
     @disease = @patient.associated_diseases.find(params[:disease_id])
     @diagnosed_disease = @patient.diagnosed_associated_diseases.find_by_disease_id(params[:disease_id])
@@ -88,25 +106,35 @@ class PatientsController < ApplicationController
     end
   end
   
-  def update_main_disease_form
-  end
-  
-  def update_main_disease
-  end
-
-  def add_associated_disease_form
-    diseases  = @patient.associated_diseases.map(&:id).uniq
+  def add_main_disease_form
+    diseases  = @patient.main_diseases.map(&:id).uniq
     @diseases = Disease.all.reject{ |a| diseases.include?(a.id) }
-    @associated_disease = @patient.diagnosed_associated_diseases.build
+    @main_disease = @patient.diagnosed_main_diseases.build
     respond_to do |format|
       format.js
     end
   end
 
-  def add_main_disease_form
-    diseases  = @patient.main_diseases.map(&:id).uniq
-    @diseases = Disease.all.reject{ |a| diseases.include?(a.id) }
-    @main_disease = @patient.diagnosed_main_diseases.build
+  def add_main_disease
+    v = params[:patient][:diagnosed_main_disease]
+    @patient.diagnosed_main_diseases.build(disease_id: v[:disease_id]).progresses.build(percentage: v[:progress][:percentage], progress_date: v[:progress][:progress_date], additional_note: v[:progress][:additional_note])
+    @patient.save!
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update_main_disease_form
+    @disease = @patient.associated_diseases.find(params[:disease_id])
+    @diagnosed_disease = @patient.diagnosed_associated_diseases.find_by_disease_id(params[:disease_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def update_main_disease
+    params.require(:patient).permit!
+    @patient.diagnosed_main_diseases.find_by_disease_id(params[:disease_id]).progresses.build(params[:patient][:diagnosed_main_disease][:progress]).save
     respond_to do |format|
       format.js
     end

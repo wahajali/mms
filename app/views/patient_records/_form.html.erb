@@ -56,6 +56,8 @@
     <% end %>
   </div>
 
+  <%= link_to "Add Associated Diseases", add_associated_disease_form_patient_path(@patient), remote: true %></br></br>
+
   <div class='diagnosed-main-diseases'>
     <% if @patient.diagnosed_main_diseases.any? %>
       <%= render partial: 'diagnosed_diseases', locals: { diseases: @patient.diagnosed_main_diseases, header: 'Diagnosed Main Diseases', val: 2 } %>
@@ -63,7 +65,6 @@
   </div>
 
   <%= link_to "Add Main Diseases", add_main_disease_form_patient_path(@patient), remote: true %></br></br>
-  <%= link_to "Add Associated Diseases", add_associated_disease_form_patient_path(@patient), remote: true %></br></br>
 
   <%#= f.collection_select(:medicine_ids, @medicine_homeo, :id, :name, {label: 'Prescribed Homeo Medicines'}, {id: 'prescribed-medicine-homeo'}) %>
 

@@ -1,2 +1,2 @@
 $('.diagnosed-associated-diseases').html('<%= escape_javascript(render partial: 'patient_records/diagnosed_diseases', locals: { diseases: @patient.diagnosed_associated_diseases, header: 'Diagnosed Associated Diseases', val: 1 }) %>');
-$('#patient-disease-modal-associated-update').modal('hide');
+$('#patient-disease-modal-associated').modal('hide');

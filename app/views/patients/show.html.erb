@@ -3,6 +3,31 @@
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
+<%
+#  card_no                     :string(255)
+#  card_date                   :date
+#  first_name                  :string(255)
+#  last_name                   :string(255)
+#  fathers_name                :string(255)
+#  mothers_name                :string(255)
+#  husbands_name               :string(255)
+#  dob                         :date
+#  referred_by                 :string(255)
+#  gender                      :string(255)
+#  marital_status              :string(255)
+#  blood_group                 :string(255)
+#  patient_type                :string(255)
+#  financial_type              :string(255)
+#  treatment_type              :string(255)
+#  created_at                  :datetime
+#  updated_at                  :datetime
+#  family_history_description  :text
+#  additional_notes            :text
+#  mobile_number               :string(255)
+#  landline                    :text
+#  patient_history_description :text
+#
+  #%>
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:card_no) %>:</strong></dt>
   <dd><%= @patient.card_no %></dd>
@@ -20,6 +45,12 @@
   <dd><%= @patient.husbands_name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:dob) %>:</strong></dt>
   <dd><%= @patient.dob %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:Address) %>:</strong></dt>
+  <dd><%= @patient.address.get_address %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:mobile_number) %>:</strong></dt>
+  <dd><%= @patient.mobile_number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:landline) %>:</strong></dt>
+  <dd><%= @patient.landline %></dd>
   <dt><strong><%= model_class.human_attribute_name(:referred_by) %>:</strong></dt>
   <dd><%= @patient.referred_by %></dd>
   <dt><strong><%= model_class.human_attribute_name(:gender) %>:</strong></dt>
@@ -38,10 +69,16 @@
   <% @patient.previous_diseases.each do |i| %>
     <dd><%= i.name %></dd>
   <% end %>
+  <dt><strong><%= model_class.human_attribute_name(:patient_history_description) %>:</strong></dt>
+  <dd><%= @patient.patient_history_description %></dd>
   <dt><strong><%= model_class.human_attribute_name(:family_history) %>:</strong></dt>
   <% @patient.family_history_diseases.each do |i| %>
     <dd><%= i.name %></dd>
   <% end %>
+  <dt><strong><%= model_class.human_attribute_name(:family_history_description) %>:</strong></dt>
+  <dd><%= @patient.family_history_description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:additional_notes) %>:</strong></dt>
+  <dd><%= @patient.additional_notes %></dd>
 </dl>
 
 <% if @patient_records.any? %>
@@ -85,6 +122,18 @@
   </table>
 <% end %>
 
+<div class='diagnosed-associated-diseases'>
+  <% if @patient.diagnosed_associated_diseases.any? %>
+    <%= render partial: 'patient_records/diagnosed_diseases', locals: { diseases: @patient.diagnosed_associated_diseases, header: 'Diagnosed Associated Diseases', val: 1 } %>
+  <% end %>
+</div>
+
+<div class='diagnosed-main-diseases'>
+  <% if @patient.diagnosed_main_diseases.any? %>
+    <%= render partial: 'patient_records/diagnosed_diseases', locals: { diseases: @patient.diagnosed_main_diseases, header: 'Diagnosed Main Diseases', val: 2 } %>
+  <% end %>
+</div>
+
 <% if @patient.legacy_cards.any? %>
   <div class="page-header">
     <h3><%=t '.title', :default => 'Legacy Appointment Cards' %></h3>
@@ -94,7 +143,7 @@
     <thead>
       <tr>
         <th>Appointment Card</th>
-        <th>Appointment Date</th>
+        <th>Creation Date</th>
         <th><%=t '.actions', :default => t("helpers.actions") %></th>
       </tr>
     </thead>
@@ -127,4 +176,3 @@
   :class => 'btn btn-danger' %>
 <%= link_to 'New Record', new_patient_patient_record_path(@patient), :class => 'btn btn-default'  %>
 <%= link_to 'Add Legacy Card', edit_legacy_card_patient_path(@patient), :class => 'btn btn-default'  %>
-<%= link_to 'Manage Diseases', patient_record_form_patient_path(@patient), :class => 'btn btn-default'  %>

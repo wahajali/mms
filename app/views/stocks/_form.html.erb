@@ -15,6 +15,18 @@
     </div>
   <% end %>
 
+  <% if @stock.cost_centerable.nil? %>
+    <%= f.collection_select(:cost_centerable_id, cost_centers, :value, :name, {prompt: true, label: 'Business Center'}, id: 'cost-centerable-id') %>
+  <% else %>
+    <%= f.collection_select(:cost_centerable_id, cost_centers, :value, :name, {prompt: true, label: 'Business Center', selected: @stock.cost_centerable.value}, id: 'cost-centerable-id') %>
+  <% end %>
+
+  <% if @stock.business_category.nil? %>
+    <%= f.collection_select(:business_category_id, {}, :id, :name, {prompt: true, label: 'Business Category'}, id: 'business-category-id') %>
+  <% else %>
+    <%= f.collection_select(:business_category_id, @stock.cost_centerable.business_categories, :id, :name, {prompt: true, label: 'Business Category', selected: @stock.business_category.id}, id: 'business-category-id') %>
+  <% end %>
+  
   <%= f.collection_select(:medicine_id, Medicine.all, :id, :name, {label: 'Medicine Name', :prompt => true}) %>
   <%= f.date_field :purchase_date, :value => Date.today %>
   <%= f.number_field :purchase_qty %>
@@ -25,6 +37,6 @@
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            stocks_path, :class => 'btn btn-default' %>
+            medicines_path, :class => 'btn btn-default' %>
 
 <% end %>
