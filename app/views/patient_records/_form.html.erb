@@ -31,24 +31,8 @@
   <%= f.text_area :investigation_and_report %>
   <%= f.text_area :present_complaint %>
   <%= f.text_area :conducted_physical_examination %>
-  <%= f.fields_for :prescriptions do |b| %>
-    <div class='prescription'>
-      <%= b.static_control :medication_type, label: { text: "Medicine Type: " } do %>
-        <%= check_box_tag(:homeopathy, 'homeo', true, id: 'medication-type-homeo') %>
-        <%= label_tag(:homeopathy, "Hemeopathic Medications") %>
-        <%= check_box_tag(:herbal, 'herbal', true, id: 'medication-type-herbal') %>
-        <%= label_tag(:herbal, "Herbal Medications") %>
-        <%= check_box_tag(:allopathic, 'allopathic', true, id: 'medication-type-allo') %>
-        <%= label_tag(:allopathic, "Allopathic Medications") %>
-      <% end %>
-      <%= b.select :medicine_id, options_for_select(@medicines.map{ |c| [c.display_name, c.id, {'class' => "medication-type-#{c.medication_type.try(:downcase)}"}]}, @medicines.first.id), {}, class: 'medicine-select' %>
-      <%#= b.select :medicine_id, options_for_select(Medicine.map{ |c| [c.name, c.id, {'class' => "#{c.bl_or_pl.try(:underscore)}"}]}), {}, class: 'medicine-select' %>
-      <%= link_to 'Details', preview_medicine_path(@medicines.first), id: 'link-to-medicine' %>
-      <%= b.text_field :dosage %>
-      <%= b.text_area :notes %>
-      <%= b.link_to_remove "Remove this prescription" %>
-    </div>
-  <% end %>
+
+  <%= render partial: 'prescriptions', locals: { medicines: @medicines, f: f } %>
 
   <div class='diagnosed-associated-diseases'>
     <% if @patient.diagnosed_associated_diseases.any? %>
@@ -56,7 +40,11 @@
     <% end %>
   </div>
 
-  <%= link_to "Add Associated Diseases", add_associated_disease_form_patient_path(@patient), remote: true %></br></br>
+  <%= link_to add_associated_disease_form_patient_path(@patient), class: 'btn btn-success', remote: true do %>
+    <i class="fa fa-plus-circle"> Add Associated Diseases</i>
+  <% end %>
+  
+  </br></br>
 
   <div class='diagnosed-main-diseases'>
     <% if @patient.diagnosed_main_diseases.any? %>
@@ -64,9 +52,11 @@
     <% end %>
   </div>
 
-  <%= link_to "Add Main Diseases", add_main_disease_form_patient_path(@patient), remote: true %></br></br>
+  <%= link_to add_main_disease_form_patient_path(@patient), class: 'btn btn-success', remote: true do %>
+    <i class="fa fa-plus-circle"> Add Main Diseases</i>
+  <% end %>
 
-  <%#= f.collection_select(:medicine_ids, @medicine_homeo, :id, :name, {label: 'Prescribed Homeo Medicines'}, {id: 'prescribed-medicine-homeo'}) %>
+  </br></br>
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

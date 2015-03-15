@@ -25,10 +25,10 @@ class StocksController < ApplicationController
   # POST /stocks
   # POST /stocks.json
   def create
-    binding.pry
     stock_params["cost_centerable_type"] = stock_params["cost_centerable_id"].split(';').first
     stock_params["cost_centerable_id"] = stock_params["cost_centerable_id"].split(';').last
     @stock = Stock.new(stock_params)
+    @stock.user = current_user
 
     respond_to do |format|
       if @stock.save
@@ -45,6 +45,7 @@ class StocksController < ApplicationController
   # PATCH/PUT /stocks/1.json
   def update
     respond_to do |format|
+      @stock.user = current_user
       if @stock.update(stock_params)
         @stock.reload
         @medicine = @stock.medicine

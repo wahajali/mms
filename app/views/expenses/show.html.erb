@@ -1,19 +1,33 @@
 <%- model_class = Expense -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%=t '.title', :default => 'Expense Details' %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
-  <dd><%= @expense.date %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:expense_category_id) %>:</strong></dt>
-  <dd><%= @expense.expense_category_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:receipient) %>:</strong></dt>
-  <dd><%= @expense.receipient %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:expense_type_id) %>:</strong></dt>
-  <dd><%= @expense.expense_type_id %></dd>
+  <dd><%= @expense.receipient || '-'  %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
+  <dd><%= @expense.date || '-'  %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:expense_category) %>:</strong></dt>
+  <dd><%= @expense.expense_category.try(:name) || '-'  %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:expense_sub_category) %>:</strong></dt>
+  <dd><%= @expense.expense_sub_category.try(:name) || '-'  %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:expense_type) %>:</strong></dt>
+  <dd><%= @expense.expense_type.try(:name) || '-' %></dd>
   <dt><strong><%= model_class.human_attribute_name(:amount) %>:</strong></dt>
-  <dd><%= @expense.amount %></dd>
+  <dd><%= @expense.amount || '-'  %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:cost_center) %>:</strong></dt>
+  <dd><%= @expense.cost_centerable.try(:name) %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:unique_identifier) %>:</strong></dt>
+  <dd><%= @expense.unique_identifier || '-' %></dd>
+  <dt><strong>Voucher or Reference Details:</strong></dt>
+  <dd><%= @expense.voucher_or_ref_details || '-' %></dd>
+  <dt><strong>BS or P&L:</strong></dt>
+  <dd><%= @expense.bal_sheet_or_pl || '-' %></dd>
+  <dt><strong>BS or P&L Category:</strong></dt>
+  <dd><%= @expense.bs_or_pl_category.try(:name) || '-' %></dd>
+  <dt><strong>BS or P&L Sub-Category:</strong></dt>
+  <dd><%= @expense.bs_or_pl_sub_category.try(:name) || '-' %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

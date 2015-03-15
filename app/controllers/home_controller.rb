@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
 
+  skip_before_filter :authenticate_user!, :except => [:balance_sheet, :pnl]
+  
   # GET /home
   def home
   end

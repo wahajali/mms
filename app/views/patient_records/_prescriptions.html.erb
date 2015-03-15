@@ -1,0 +1,27 @@
+<div id='prescriptions'>
+  <%= f.fields_for :prescriptions do |b| %>
+    <div class='prescription'>
+      <%= b.static_control :medication_type, label: { text: "Medicine Type: " } do %>
+        <%= check_box_tag(:homeopathy, 'homeo', true, id: 'medication-type-homeo') %>
+        <%= label_tag(:homeopathy, "Hemeopathic Medications") %>
+        <%= check_box_tag(:herbal, 'herbal', true, id: 'medication-type-herbal') %>
+        <%= label_tag(:herbal, "Herbal Medications") %>
+        <%= check_box_tag(:allopathic, 'allopathic', true, id: 'medication-type-allo') %>
+        <%= label_tag(:allopathic, "Allopathic Medications") %>
+      <% end %>
+      <%= b.select :medicine_id, options_for_select(medicines.map{ |c| [c.display_name, c.id, {'class' => "medication-type-#{c.medication_type.try(:downcase)}"}]}, medicines.first.id), {}, class: 'medicine-select' %>
+      <%= link_to preview_medicine_path(medicines.first), id: 'link-to-medicine', class: 'btn btn-info pull-right' do %>
+        <i class="fa fa-info-circle"> Details</i>
+      <% end %>
+      </br>
+      <%= b.text_field :dosage %>
+      <%= b.text_area :notes %>
+      <%= b.link_to_remove class: 'btn btn-danger pull-right' do %>
+        <i class="fa fa-times-circle"> Remove Prescription</i>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<%= f.link_to_add :prescriptions, 'data-target' => "#prescriptions", class: 'btn btn-success' do %>
+  <i class="fa fa-plus-circle"> Add Prescription</i>
+<% end %>

@@ -6,9 +6,13 @@
       <div class="panel-heading"><%= d.disease.name %></div>
       <div class="panel-body">
         <% if val == 1 %>
-          <%= link_to 'Update Progress', update_associated_disease_form_patient_path(@patient, disease_id: d.disease_id), method: 'get', remote: true %>
+          <%= link_to update_associated_disease_form_patient_path(@patient, disease_id: d.disease_id), method: 'get', remote: true, class: 'btn btn-primary pull-right' do %>
+            <i class="fa fa-refresh"> Update Progress</i>
+          <% end %>
         <% elsif val == 2 %>
-          <%= link_to 'Update Progress', update_main_disease_form_patient_path(@patient, disease_id: d.disease_id), method: 'get', remote: true %>
+          <%= link_to update_main_disease_form_patient_path(@patient, disease_id: d.disease_id), method: 'get', remote: true, class: 'btn btn-primary pull-right' do %>
+            <i class="fa fa-refresh"> Update Progress</i>
+          <% end %>
         <% end %>
         <table class="table table-striped">
           <thead> 

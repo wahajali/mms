@@ -11,6 +11,7 @@
       <th><%= model_class.human_attribute_name(:purchase_price) %></th>
       <th><%= model_class.human_attribute_name(:expiry) %></th>
       <th><%= model_class.human_attribute_name(:present_stock) %></th>
+      <th>Last Edited By</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -23,6 +24,7 @@
         <td><%= stock.purchase_price %></td>
         <td><%= stock.expiry %></td>
         <td><%= stock.present_stock %></td>
+        <td><%= stock.user.try(:name) || '-' %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_medicine_stock_path(@medicine, stock), :class => 'btn btn-default btn-xs' %>

@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  #devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, :skip => [:registrations] 
+  as :user do
+    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
+    get 'users/add' => 'users#add', :as => 'new_user_registration'
+    post 'users' => 'users#create', as: 'user_registration'
+    #put 'users' => 'devise/registrations#update', :as => 'user_registration'
+  end
+
   resources :bs_or_pl_sub_categories
 
   get 'business_categories/get_categories' => 'business_categories#get_categories'

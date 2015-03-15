@@ -15,6 +15,7 @@
 #  cost_centerable_id   :integer
 #  cost_centerable_type :string(255)
 #  business_category_id :integer
+#  user_id              :integer
 #
 
 require 'test_helper'
