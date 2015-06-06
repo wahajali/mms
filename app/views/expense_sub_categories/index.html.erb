@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th> Parent Category</th>
+      <!-- <th> Parent Category</th> -->
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -14,7 +14,7 @@
     <% @expense_sub_categories.each do |expense_sub_category| %>
       <tr>
         <td><%= link_to expense_sub_category.name, expense_sub_category_path(expense_sub_category) %></td>
-        <td><%= expense_sub_category.expense_category.name %></td>
+        <td><%#= expense_sub_category.expense_category.name %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_expense_sub_category_path(expense_sub_category), :class => 'btn btn-default btn-xs' %>

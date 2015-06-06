@@ -30,6 +30,7 @@ class PatientRecord < ActiveRecord::Base
 
   has_many :prescriptions
   has_many :medicines, through: :prescriptions
+  belongs_to :cost_centerable, polymorphic: true
 
   accepts_nested_attributes_for :prescriptions
   accepts_nested_attributes_for :medicines

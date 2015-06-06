@@ -165,14 +165,20 @@
   </table>
 <% end %>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-  patients_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-  edit_patient_path(@patient), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-  patient_path(@patient),
-  :method => 'delete',
-  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-  :class => 'btn btn-danger' %>
-<%= link_to 'New Record', new_patient_patient_record_path(@patient), :class => 'btn btn-default'  %>
-<%= link_to 'Add History Card', edit_legacy_card_patient_path(@patient), :class => 'btn btn-default'  %>
+<div class='btn-toolbar'>
+  <%= link_to patients_path, :class => 'btn btn-default' do  %>
+    <i class="fa fa-arrow-left"> <%= t('.back', :default => t("helpers.links.back")) %></i>
+<% end %>
+  <%= link_to edit_patient_path(@patient), :class => 'btn btn-default' do %>
+    <i class="fa fa-pencil"> <%= t('.edit', :default => t("helpers.links.edit"))%></i>
+<% end %>
+  <%= link_to patient_path(@patient), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger' do  %>
+    <i class="fa fa-trash-o"> <%= t('.destroy', :default => t("helpers.links.destroy"))%></i>
+<% end %>
+  <%= link_to new_patient_patient_record_path(@patient), :class => 'btn btn-default' do %>
+    <i class="fa fa-plus"> New Record</i>
+<% end %>
+  <%= link_to edit_legacy_card_patient_path(@patient), :class => 'btn btn-default' do  %>
+    <i class="fa fa-plus"> Add History Card</i>
+<% end %>
+</div>

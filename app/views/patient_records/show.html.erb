@@ -6,14 +6,12 @@
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:patient_id) %>:</strong></dt>
   <dd><%= @patient_record.patient_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:visit_date_islamic) %>:</strong></dt>
-  <dd><%= @patient_record.visit_date_islamic %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:visit_date_english) %>:</strong></dt>
+  <dt><strong><%= model_class.human_attribute_name(:visit_date) %>:</strong></dt>
   <dd><%= @patient_record.visit_date_english %></dd>
   <dt><strong><%= model_class.human_attribute_name(:visit_day) %>:</strong></dt>
   <dd><%= @patient_record.visit_day %></dd>
   <dt><strong><%= model_class.human_attribute_name(:doctor_id) %>:</strong></dt>
-  <dd><%= @patient_record.doctor_id %></dd>
+  <dd><%= @patient_record.doctor.try(:name) %></dd>
   <dt><strong><%= model_class.human_attribute_name(:handling_person) %>:</strong></dt>
   <dd><%= @patient_record.handling_person %></dd>
   <dt><strong><%= model_class.human_attribute_name(:checked_weight) %>:</strong></dt>
@@ -34,6 +32,12 @@
   <dd><%= @patient_record.present_complaint %></dd>
   <dt><strong><%= model_class.human_attribute_name(:conducted_physical_examination) %>:</strong></dt>
   <dd><%= @patient_record.conducted_physical_examination %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:investigation_and_report) %>:</strong></dt>
+  <dd><%= @patient_record.investigation_and_report %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:additional_notes) %>:</strong></dt>
+  <dd><%= @patient_record.additional_notes %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:cost_center) %>:</strong></dt>
+  <dd><%= @patient_record.cost_centerable.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:prescriptions) %>:</strong></dt>
   <% @patient_record.prescriptions.each do |prescription| %>
     <dd><%= prescription.medicine.name %></dd>
@@ -41,6 +45,7 @@
     <dd><p><%= prescription.notes %></p></dd>
   <% end %>
 </dl>
+</br>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               patient_path(@patient), :class => 'btn btn-default'  %>

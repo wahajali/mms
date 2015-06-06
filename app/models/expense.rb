@@ -30,7 +30,20 @@ class Expense < ActiveRecord::Base
   belongs_to :cost_centerable, polymorphic: true
   belongs_to :business_category
   
-  validates :amount, :date, :bal_sheet_or_pl, :expense_category, :business_category, :cost_centerable, presence: true, allow_blank: false
+  validates :expense_type, :amount, :date, :bal_sheet_or_pl, :expense_category, :business_category, :cost_centerable, presence: true, allow_blank: false
 
   #TODO add validation that bs_or_pl_sub_category is infact a subcategory of bs_or_pl_category
+  def self.get_expenses(args)
+    expenses = Expense.where('date >= ?', args[:from])
+    expenses = expenses.where('date <= ?', args[:to])
+    expenses = expenses.where('cost_centerable_id', args[:cost_center_id]) if args[:cost_centerable_id]
+    expenses = expenses.where('cost_centerable_type', args[:cost_center_type]) if args[:cost_centerable_type]
+    expenses = expenses.where('expense_category_id', args[:ec]) if args[:ec]
+    expenses = expenses.where('expense_sub_category_id', args[:esc]) if args[:esc]
+    expenses = expenses.where('expense_type', args[:et]) if args[:et]
+    expenses = expenses.where('expense_type', args[:receipient]) if args[:receipient]
+    expenses = expenses.where('', args[:])
+    expenses = expenses.where('', args[:])
+        @expenses = Expense.where('(date >= ? AND date <= ?) AND cost_centerable_id = ? AND cost_centerable_type = ? AND expense_category_id = ?', @from, @to, @cost_center.id, @cost_center.class.to_s, params[:ec]).order('date DESC')
+  end
 end

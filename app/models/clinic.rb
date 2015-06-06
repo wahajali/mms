@@ -12,7 +12,8 @@ class Clinic < ActiveRecord::Base
   has_one :common_data, as: :entity
   has_many :phone_numbers, as: :phoneable
   has_many :expenses, as: :cost_centerable
-  has_many :business_categories, as: :business_centerable
+  has_many :incomes, as: :cost_centerable
+  #has_many :business_categories, as: :business_centerable
 
   validates :address, presence: true
   validates :common_data, presence: true

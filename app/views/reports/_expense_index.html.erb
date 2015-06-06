@@ -1,0 +1,26 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= 'Receipient' %></th>
+      <th><%= 'Date' %></th>
+      <th><%= 'Expense Category' %></th>
+      <th><%= 'Expense Subcategory' %></th>
+      <th><%= 'Expense Type' %></th>
+      <th><%= 'Amount' %></th>
+      <th><%= 'Cost Center' %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% expenses.each do |expense| %>
+      <tr>
+        <td><%= link_to expense.receipient, fetch_report_path(report_type: 'receipient', cost_centerable: @cost_center.value, from: @from, to: @to, rcpt: expense.receipient) %></td>
+        <td><%= expense.date %></td>
+        <td><%= link_to expense.expense_category.name, fetch_report_path(report_type: "ec", cost_centerable: @cost_center.value, from: @from, to: @to, ec: expense.expense_category.id) %></td>
+        <td><%= link_to expense.expense_sub_category.name, fetch_report_path(report_type: "esc", cost_centerable: @cost_center.value, from: @from, to: @to, esc: expense.expense_sub_category.id) %></td>
+        <td><%= link_to expense.expense_type.name, fetch_report_path(report_type: "et", cost_centerable: @cost_center.value, from: @from, to: @to, et: expense.expense_type.id) %></td>
+        <td><%= expense.amount %></td>
+        <td><%= expense.cost_centerable.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

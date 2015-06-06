@@ -31,6 +31,11 @@
   <%= f.text_area :investigation_and_report %>
   <%= f.text_area :present_complaint %>
   <%= f.text_area :conducted_physical_examination %>
+  <% if @patient_record.cost_centerable.nil? %>
+    <%= f.collection_select(:cost_centerable_id, cost_centers, :value, :name, {prompt: true, label: 'Business Center'}, id: 'patient-cost-centerable-id') %>
+  <% else %>
+    <%= f.collection_select(:cost_centerable_id, cost_centers, :value, :name, {prompt: true, label: 'Business Center', selected: @expense.cost_centerable.value}, id: 'patient-cost-centerable-id') %>
+  <% end %>
 
   <%= render partial: 'prescriptions', locals: { medicines: @medicines, f: f } %>
 

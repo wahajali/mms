@@ -26,7 +26,8 @@ class ExpenseSubCategoriesController < ApplicationController
   # POST /expense_sub_categories
   # POST /expense_sub_categories.json
   def create
-    @expense_sub_category = ExpenseSubCategory.new(expense_sub_category_params)
+    @expense_sub_category = ExpenseSubCategory.new(name: params[:expense_sub_category][:name])
+    @expense_sub_category.expense_categories << ExpenseCategory.find(params[:expense_sub_category][:expense_category_expense_sub_category][:expense_category_id] - [""])
 
     respond_to do |format|
       if @expense_sub_category.save
@@ -43,7 +44,19 @@ class ExpenseSubCategoriesController < ApplicationController
   # PATCH/PUT /expense_sub_categories/1
   # PATCH/PUT /expense_sub_categories/1.json
   def update
+    cat_before = @expense_sub_category.expense_categories
+    cat_after = ExpenseCategory.find(params[:expense_sub_category][:expense_category_expense_sub_category][:expense_category_id] - [""])
+    cat_remove = cat_before - cat_after 
+    cat_add = cat_after - cat_before
+
     respond_to do |format|
+      if cat_after.blank?
+        @expense_categories = ExpenseCategory.all
+        format.html { render :edit }
+      end
+      @expense_sub_category.expense_categories.destroy(cat_remove)
+      @expense_sub_category.expense_categories << cat_add
+      params[:expense_sub_category].delete(:expense_category_expense_sub_category)
       if @expense_sub_category.update(expense_sub_category_params)
         format.html { redirect_to @expense_sub_category, notice: 'Expense sub category was successfully updated.' }
         format.json { render :show, status: :ok, location: @expense_sub_category }

@@ -40,6 +40,8 @@ gem 'jquery-turbolinks'
 gem "paperclip", "~> 4.2"
 gem 'devise'
 gem "pundit"
+gem 'dashing-rails'
+gem 'puma'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -1,0 +1,2 @@
+<%= render partial: 'header', locals: { title: params[:report_type].titleize, to: @to, from: @from, cost_center: @cost_center } %>
+<%= render partial: 'expense_index', locals: { expenses: @expenses } %>

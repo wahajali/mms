@@ -30,6 +30,8 @@ class PatientRecordsController < ApplicationController
   # POST /patient_records.json
   def create
     @patient = Patient.find(params[:patient_id])
+    patient_record_params["cost_centerable_type"] = patient_record_params["cost_centerable_id"].split(';').first
+    patient_record_params["cost_centerable_id"] = patient_record_params["cost_centerable_id"].split(';').last
     @patient_record = PatientRecord.new(patient_record_params)
 
     respond_to do |format|
@@ -47,6 +49,8 @@ class PatientRecordsController < ApplicationController
   # PATCH/PUT /patient_records/1
   # PATCH/PUT /patient_records/1.json
   def update
+    patient_record_params["cost_centerable_type"] = patient_record_params["cost_centerable_id"].split(';').first
+    patient_record_params["cost_centerable_id"] = patient_record_params["cost_centerable_id"].split(';').last
     @patient = Patient.find(params[:patient_id])
     respond_to do |format|
       if @patient_record.update(patient_record_params)

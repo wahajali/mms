@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount Dashing::Engine, at: Dashing.config.engine_path
   #devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_for :users, :skip => [:registrations] 
   as :user do
@@ -105,6 +106,7 @@ Rails.application.routes.draw do
   get "search" => "search#query"
   get "balance_sheet" => "reports#balance_sheet"
   get "pnl" => "reports#pnl"
+  get "fetch_report" => "reports#fetch_report"
   get "reports" => "reports#reports"
 
 #  resources :addresses

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313185513) do
+ActiveRecord::Schema.define(version: 20150425111239) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -115,11 +115,17 @@ ActiveRecord::Schema.define(version: 20150313185513) do
     t.datetime "updated_at"
   end
 
+  create_table "expense_categories_expense_sub_categories", force: true do |t|
+    t.integer  "expense_category_id"
+    t.integer  "expense_sub_category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "expense_sub_categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "expense_category_id"
   end
 
   create_table "expense_types", force: true do |t|
@@ -161,11 +167,17 @@ ActiveRecord::Schema.define(version: 20150313185513) do
     t.datetime "updated_at"
   end
 
+  create_table "income_categories_income_sub_categories", force: true do |t|
+    t.integer  "income_category_id"
+    t.integer  "income_sub_category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "income_sub_categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "income_category_id"
   end
 
   create_table "income_types", force: true do |t|
@@ -269,6 +281,8 @@ ActiveRecord::Schema.define(version: 20150313185513) do
     t.datetime "updated_at"
     t.text     "investigation_and_report"
     t.text     "additional_notes"
+    t.string   "cost_centerable_type"
+    t.integer  "cost_centerable_id"
   end
 
   create_table "patients", force: true do |t|
