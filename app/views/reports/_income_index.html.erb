@@ -1,0 +1,26 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= 'Benefactor' %></th>
+      <th><%= 'Date' %></th>
+      <th><%= 'Income Category' %></th>
+      <th><%= 'Income Subcategory' %></th>
+      <th><%= 'Income Type' %></th>
+      <th><%= 'Amount' %></th>
+      <th><%= 'Cost Center' %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% incomes.each do |income| %>
+      <tr>
+        <td><%= link_to income.benefactor, fetch_report_path(report_type: 'income', cost_centerable: @cost_center.map(&:value), from: @from, to: @to, benefactor: income.benefactor) %></td>
+        <td><%= income.date %></td>
+        <td><%= link_to income.income_category.name, fetch_report_path(report_type: "income", cost_centerable: @cost_center.map(&:value), from: @from, to: @to, income_category_id: income.income_category.id) %></td>
+        <td><%= link_to income.income_sub_category.name, fetch_report_path(report_type: "income", cost_centerable: @cost_center.map(&:value), from: @from, to: @to, income_sub_category_id: income.income_sub_category.id) %></td>
+        <td><%= link_to income.income_type.name, fetch_report_path(report_type: "income", cost_centerable: @cost_center.map(&:value), from: @from, to: @to, income_type_id: income.income_type.id) %></td>
+        <td><%= income.amount %></td>
+        <td><%= link_to income.cost_centerable.name, fetch_report_path(report_type: 'income', cost_centerable: [income.cost_centerable.value], from: @from, to: @to) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

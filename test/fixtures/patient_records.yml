@@ -22,6 +22,8 @@
 #  updated_at                     :datetime
 #  investigation_and_report       :text
 #  additional_notes               :text
+#  cost_centerable_type           :string(255)
+#  cost_centerable_id             :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

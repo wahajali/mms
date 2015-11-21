@@ -1,16 +1,27 @@
 <div>
   <h2>Reports</h2>
   <%= bootstrap_form_tag url: fetch_report_path, method: :get do |f| %>
-    <%= f.select(:report_type,  [['Expenses', 'expenses'], ['Income', 'income'], ['Balance Sheet', 'bs'], ['Profit & Loss', 'pl']], {prompt: true, label: 'Report'}) %>
-    <%= f.select(:cost_centerable, cost_centers.collect { |a| [a.name, a.value] }, {prompt: false, include_blank: true, label: 'Business Center'}) %>
-    <div id="expense-fields">
-      <%= f.text_field(:receipient) %>
-      <%= f.select(:expense_type_id, ExpenseType.all.collect { |a| [a.name, a.id] }, {prompt: false, include_blank: true, label: 'Expense Type'}, id: "report-expense-type-id") %>
-      <%= f.select(:expense_category_id, ExpenseCategory.all.collect { |a| [a.name, a.id] }, {prompt: false, include_blank: true, label: 'Expense Category'}, id: "report-expense-category-id") %>
-      <%= f.select(:expense_sub_category_id, ExpenseSubCategory.all.collect { |a| [a.name, a.id] }, {prompt: false, include_blank: true, label: 'Expense Sub Category'}, id: "report-expense-sub-category-id") %>
-    </div>
+    <%= f.select(:report_type,  [['Expenses', 'expenses'], ['Income', 'income'], ['Balance Sheet', 'balance-sheet'], ['Profit & Loss', 'profit-and-loss'], ['Diseases', 'diseases'], ['Medicines', 'medicines']], {prompt: true, label: 'Report'}) %>
+  <%= f.select(:cost_centerable, cost_centers.collect { |a| [a.name, a.value] }, {prompt: false, include_blank: false, label: 'Business Center'}, { multiple: true }) %>
+  <div id="income-fields">
+    <%= f.text_field(:benefactor, label: 'Received From') %>
+    <%= f.select(:income_type_id, IncomeType.all.collect { |a| [a.name, a.id] }, {prompt: false, include_blank: true, label: 'Income Type'}, id: "report-income-type-id") %>
+    <%= f.select(:income_category_id, IncomeCategory.all.collect { |a| [a.name, a.id] }, {prompt: false, include_blank: true, label: 'Income Category'}, id: "report-income-category-id") %>
+    <%= f.select(:income_sub_category_id, IncomeSubCategory.all.collect { |a| [a.name, a.id] }, {prompt: false, include_blank: true, label: 'Income Sub Category'}, id: "report-income-sub-category-id") %>
+  </div>
+  <div id="expense-fields">
+    <%= f.text_field(:receipient, label: 'Paid To') %>
+    <%= f.select(:expense_type_id, ExpenseType.all.collect { |a| [a.name, a.id] }, {prompt: false, include_blank: true, label: 'Expense Type'}, id: "report-expense-type-id") %>
+    <%= f.select(:expense_category_id, ExpenseCategory.all.collect { |a| [a.name, a.id] }, {prompt: false, include_blank: true, label: 'Expense Category'}, id: "report-expense-category-id") %>
+    <%= f.select(:expense_sub_category_id, ExpenseSubCategory.all.collect { |a| [a.name, a.id] }, {prompt: false, include_blank: true, label: 'Expense Sub Category'}, id: "report-expense-sub-category-id") %>
+  </div>
+  <div id="medicine-fields">
+    <%= f.select(:medicine_type_id, MedicineType.all.collect { |a| [a.medicine_type, a.id] }, {prompt: false, include_blank: true, label: 'Medince Type'}, id: "report-medince-type-id") %>
+  </div>
+  <div id="date-fields">
     <%= f.date_field 'from', :value => Date.today %>
     <%= f.date_field 'to', :value => Date.today %>
-    <%= f.submit 'Submit', class: 'btn btn-primary' %>
-  <% end %>
+  </div>
+  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+<% end %>
 </div>

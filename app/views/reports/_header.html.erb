@@ -1,3 +1,47 @@
 <div class="page-header">
-  <h1><%= "Report for #{title} for #{cost_center.name} between #{from.to_date.strftime("%d-%m-%Y")} and #{to.to_date.strftime("%d-%m-%Y")}" %></h1>
+  <h3>Search Criteria</h3>
+  <dl class="dl-horizontal">
+    <% @cost_center.each do |a| %>
+      <dt><strong>"Cost Center":</strong></dt>
+      <dd><%= a.name %></dd>
+    <% end %>
+    <dt><strong>"From Date":</strong></dt>
+    <dd><%= @from.to_date.strftime("%d-%m-%Y") %></dd>
+    <% if @to.present? %>
+      <dt><strong>"To Date":</strong></dt>
+      <dd><%= @to.to_date.strftime("%d-%m-%Y") %></dd>
+    <% end %>
+    <% if @benefactor.present? %>
+      <dt><strong>"Benefactor":</strong></dt>
+      <dd><%= @benefactor %></dd>
+    <% end %>
+    <% if @income_type.present? %>
+      <dt><strong>"Income Type":</strong></dt>
+      <dd><%= @income_type.name %></dd>
+    <% end %>
+    <% if @income_category.present? %>
+      <dt><strong>"Income Category":</strong></dt>
+      <dd><%= @income_category.name %></dd>
+    <% end %>
+    <% if @income_sub_category.present? %>
+      <dt><strong>"Income Sub-Category":</strong></dt>
+      <dd><%= @income_sub_category.name %></dd>
+    <% end %>
+    <% if @receipient.present? %>
+      <dt><strong>"Receipient":</strong></dt>
+      <dd><%= @receipient %></dd>
+    <% end %>
+    <% if @expense_type.present? %>
+      <dt><strong>"Expense Type":</strong></dt>
+      <dd><%= @expense_type.name %></dd>
+    <% end %>
+    <% if @expense_category.present? %>
+      <dt><strong>"Expense Category":</strong></dt>
+      <dd><%= @expense_category.name %></dd>
+    <% end %>
+    <% if @expense_sub_category.present? %>
+      <dt><strong>"Expense Sub-Category":</strong></dt>
+      <dd><%= @expense_sub_category.name %></dd>
+    <% end %>
+  </dl>
 </div>

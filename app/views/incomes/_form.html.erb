@@ -42,7 +42,7 @@
 <% end %>
 
   <%= f.collection_select(:income_type_id, IncomeType.all, :id, :name, {prompt: true}) %>
-  <%= f.text_field :benefactor, placeholder: 'Benefactor Name' %>
+  <%= f.text_field :benefactor, placeholder: 'Benefactor Name', label: "Paid To" %>
   <%= f.text_field :unique_identifier, placeholder: 'Mobile Number as Unique Identifier', label: 'Mobile Number' %>
   <%= f.text_area :voucher_or_ref_details, placeholder: 'Voucher Details', label: 'Voucher or Reference Details' %>
   <%= f.number_field :amount, placeholder: 'Amount' %>

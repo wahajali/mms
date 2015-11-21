@@ -42,7 +42,7 @@
 <% end %>
 
   <%= f.collection_select(:expense_type_id, ExpenseType.all, :id, :name, {prompt: true}) %>
-  <%= f.text_field :receipient, placeholder: 'Receipient Name' %>
+  <%= f.text_field :receipient, placeholder: 'Receipient Name', label: "Recieved From" %>
   <%= f.text_field :unique_identifier, placeholder: 'Mobile Number as Unique Identifier', label: 'Mobile Number' %>
   <%= f.text_area :voucher_or_ref_details, placeholder: 'Voucher Details', label: 'Voucher or Reference Details' %>
   <%= f.number_field :amount, placeholder: 'Amount' %>

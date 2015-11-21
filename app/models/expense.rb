@@ -42,8 +42,6 @@ class Expense < ActiveRecord::Base
     expenses = expenses.where('expense_sub_category_id', args[:esc]) if args[:esc]
     expenses = expenses.where('expense_type', args[:et]) if args[:et]
     expenses = expenses.where('expense_type', args[:receipient]) if args[:receipient]
-    expenses = expenses.where('', args[:])
-    expenses = expenses.where('', args[:])
-        @expenses = Expense.where('(date >= ? AND date <= ?) AND cost_centerable_id = ? AND cost_centerable_type = ? AND expense_category_id = ?', @from, @to, @cost_center.id, @cost_center.class.to_s, params[:ec]).order('date DESC')
+    @expenses = Expense.where('(date >= ? AND date <= ?) AND cost_centerable_id = ? AND cost_centerable_type = ? AND expense_category_id = ?', @from, @to, @cost_center.id, @cost_center.class.to_s, params[:ec]).order('date DESC')
   end
 end
